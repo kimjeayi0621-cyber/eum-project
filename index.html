@@ -6,30 +6,111 @@
 <title>E:UM | 세대와 세대를 잇다</title>
 <style>
 :root{--green:#245b46;--green2:#34765b;--mint:#eaf2ed;--ink:#202a25;--muted:#718078;--line:#e4eae6;--bg:#f7f9f7;--white:#fff;--gold:#d6a94e}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,Pretendard,"Noto Sans KR",Arial,sans-serif}
-button,input,select,textarea{font:inherit}button{cursor:pointer}
-header{height:72px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 max(5vw,24px);position:sticky;top:0;z-index:5}
-.logo{font-size:25px;font-weight:850;letter-spacing:-1px;color:var(--green);cursor:pointer}.logo small{font-size:11px;letter-spacing:1px;color:#83948a;margin-left:8px}
-nav{display:flex;gap:26px;align-items:center}nav button{border:0;background:none;color:#536158;font-weight:650;padding:10px 2px}nav button.active{color:var(--green);border-bottom:2px solid var(--green)}
-.btn{border:0;border-radius:10px;padding:12px 18px;font-weight:750;background:var(--green);color:white}.btn:hover{background:var(--green2)}.btn.light{background:var(--mint);color:var(--green)}.btn.outline{background:white;color:var(--green);border:1px solid #cbd9d0}.btn.small{padding:9px 13px;font-size:13px}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,Pretendard,"Noto Sans KR",Arial,sans-serif}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+header{min-height:72px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:12px max(5vw,24px);position:sticky;top:0;z-index:5;gap:12px;flex-wrap:wrap}
+.logo{font-size:25px;font-weight:850;letter-spacing:-1px;color:var(--green);cursor:pointer}
+.logo small{font-size:11px;letter-spacing:1px;color:#83948a;margin-left:8px}
+nav{display:flex;gap:20px;align-items:center}
+nav button{border:0;background:none;color:#536158;font-weight:650;padding:10px 2px}
+nav button.active{color:var(--green);border-bottom:2px solid var(--green)}
+.btn{border:0;border-radius:10px;padding:12px 18px;font-weight:750;background:var(--green);color:white}
+.btn:hover{background:var(--green2)}
+.btn.light{background:var(--mint);color:var(--green)}
+.btn.outline{background:white;color:var(--green);border:1px solid #cbd9d0}
+.btn.small{padding:9px 13px;font-size:13px}
 main{max-width:1120px;margin:auto;padding:34px 24px 80px}
 .hero{background:linear-gradient(115deg,#eaf2ed 0%,#f5f7f2 60%,#e5eee8 100%);border-radius:24px;padding:58px 6%;display:grid;grid-template-columns:1.2fr .8fr;gap:30px;align-items:center;overflow:hidden}
-.eyebrow{font-size:12px;letter-spacing:2px;font-weight:800;color:var(--green2)}h1{font-size:clamp(34px,5vw,54px);line-height:1.18;letter-spacing:-2px;margin:16px 0}h1 span{color:var(--green)}.hero p{color:#627168;line-height:1.8;max-width:510px}.hero-actions{display:flex;gap:10px;margin-top:26px;flex-wrap:wrap}
-.hero-art{height:230px;position:relative;display:flex;align-items:center;justify-content:center}.orb{width:190px;height:190px;border-radius:50%;background:#d4e5d9;display:grid;place-items:center;color:var(--green);font-size:55px;font-weight:900;box-shadow:25px 20px 0 #e4ece5}.orbit{position:absolute;border:1px solid #b6cdbd;border-radius:50%;width:260px;height:120px;transform:rotate(-28deg)}.orbit.two{transform:rotate(35deg);width:250px;height:145px}.mini-tag{position:absolute;background:white;border:1px solid var(--line);padding:10px 14px;border-radius:12px;box-shadow:0 8px 24px #284b3612;font-size:12px;font-weight:750}.tag-a{top:15px;left:0}.tag-b{right:0;bottom:20px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:22px 0 42px}.stat{background:white;border:1px solid var(--line);border-radius:15px;padding:18px 20px}.stat b{display:block;font-size:24px;color:var(--green)}.stat span{font-size:12px;color:var(--muted)}
-.section-head{display:flex;justify-content:space-between;align-items:end;margin:38px 0 18px;gap:12px}.section-head h2{margin:0;font-size:24px;letter-spacing:-.8px}.section-head p{margin:6px 0 0;color:var(--muted);font-size:13px}
-.filters{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}.chip{border:1px solid var(--line);background:white;color:#65736b;padding:9px 14px;border-radius:30px;font-size:13px}.chip.active{background:var(--green);border-color:var(--green);color:white}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.project-card{background:white;border:1px solid var(--line);border-radius:16px;padding:20px;display:flex;flex-direction:column;min-height:255px;transition:.2s}.project-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px #203c2c0d}.card-top{display:flex;justify-content:space-between;align-items:center;gap:8px}.pill{background:var(--mint);color:var(--green);font-size:11px;font-weight:800;padding:6px 9px;border-radius:30px}.pill.gold{background:#f8f1df;color:#8b6824}.project-card h3{font-size:17px;line-height:1.45;margin:16px 0 8px}.project-card p{font-size:13px;color:var(--muted);line-height:1.65;margin:0 0 16px}.meta{font-size:12px;color:#7d8982;margin-top:auto;padding:12px 0;border-top:1px solid #edf0ed}.card-actions{display:flex;gap:8px}.card-actions button{flex:1}
-.page-title{margin:8px 0 26px}.page-title h1{font-size:34px;margin:0 0 8px}.page-title p{color:var(--muted);margin:0}
-.panel{background:white;border:1px solid var(--line);border-radius:18px;padding:26px;max-width:800px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.field{display:flex;flex-direction:column;gap:8px}.field.full{grid-column:1/-1}.field label{font-size:13px;font-weight:750}.field input,.field select,.field textarea{border:1px solid #dce4de;border-radius:10px;padding:12px;background:#fff;outline:none}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--green2);box-shadow:0 0 0 3px #34765b18}.field textarea{min-height:105px;resize:vertical}.hint{font-size:11px;color:#87938c}.radio-row{display:flex;gap:8px;flex-wrap:wrap}.radio-row label{border:1px solid var(--line);padding:10px 13px;border-radius:10px;font-weight:550;cursor:pointer}.radio-row input{accent-color:var(--green)}
-.empty{border:1px dashed #cbd8cf;border-radius:15px;padding:36px;text-align:center;color:var(--muted);background:#fbfcfb}.empty b{display:block;color:var(--ink);margin-bottom:8px}
-.profile-box{background:white;border:1px solid var(--line);border-radius:18px;padding:25px;max-width:700px}.profile-head{display:flex;align-items:center;gap:16px;margin-bottom:20px}.avatar{width:54px;height:54px;border-radius:50%;background:var(--mint);display:grid;place-items:center;color:var(--green);font-size:22px;font-weight:850}
+.eyebrow{font-size:12px;letter-spacing:2px;font-weight:800;color:var(--green2)}
+h1{font-size:clamp(34px,5vw,54px);line-height:1.18;letter-spacing:-2px;margin:16px 0}
+h1 span{color:var(--green)}
+.hero p{color:#627168;line-height:1.8;max-width:510px}
+.hero-actions{display:flex;gap:10px;margin-top:26px;flex-wrap:wrap}
+.hero-art{height:230px;position:relative;display:flex;align-items:center;justify-content:center}
+.orb{width:190px;height:190px;border-radius:50%;background:#d4e5d9;display:grid;place-items:center;color:var(--green);font-size:55px;font-weight:900;box-shadow:25px 20px 0 #e4ece5}
+.orbit{position:absolute;border:1px solid #b6cdbd;border-radius:50%;width:260px;height:120px;transform:rotate(-28deg)}
+.orbit.two{transform:rotate(35deg);width:250px;height:145px}
+.mini-tag{position:absolute;background:white;border:1px solid var(--line);padding:10px 14px;border-radius:12px;box-shadow:0 8px 24px #284b3612;font-size:12px;font-weight:750}
+.tag-a{top:15px;left:0}
+.tag-b{right:0;bottom:20px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:22px 0 42px}
+.stat{background:white;border:1px solid var(--line);border-radius:15px;padding:18px 20px}
+.stat b{display:block;font-size:24px;color:var(--green)}
+.stat span{font-size:12px;color:var(--muted)}
+.section-head{display:flex;justify-content:space-between;align-items:end;margin:38px 0 18px;gap:12px}
+.section-head h2{margin:0;font-size:24px;letter-spacing:-.8px}
+.section-head p{margin:6px 0 0;color:var(--muted);font-size:13px}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
+.chip{border:1px solid var(--line);background:white;color:#65736b;padding:9px 14px;border-radius:30px;font-size:13px}
+.chip.active{background:var(--green);border-color:var(--green);color:white}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.project-card{background:white;border:1px solid var(--line);border-radius:16px;padding:20px;display:flex;flex-direction:column;min-height:255px;transition:.2s}
+.project-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px #203c2c0d}
+.card-top{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.pill{background:var(--mint);color:var(--green);font-size:11px;font-weight:800;padding:6px 9px;border-radius:30px}
+.pill.gold{background:#f8f1df;color:#8b6824}
+.project-card h3{font-size:17px;line-height:1.45;margin:16px 0 8px}
+.project-card p{font-size:13px;color:var(--muted);line-height:1.65;margin:8px 0 16px;overflow-wrap:anywhere}
+.meta{font-size:12px;color:#7d8982;margin-top:auto;padding:12px 0;border-top:1px solid #edf0ed}
+.card-actions{display:flex;gap:8px}
+.card-actions button{flex:1}
+.page-title{margin:8px 0 26px}
+.page-title h1{font-size:34px;margin:0 0 8px}
+.page-title p{color:var(--muted);margin:0}
+.panel{background:white;border:1px solid var(--line);border-radius:18px;padding:26px;max-width:800px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.field{display:flex;flex-direction:column;gap:8px}
+.field.full{grid-column:1/-1}
+.field label{font-size:13px;font-weight:750}
+.field input,.field select,.field textarea{border:1px solid #dce4de;border-radius:10px;padding:12px;background:#fff;outline:none;width:100%}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--green2);box-shadow:0 0 0 3px #34765b18}
+.field textarea{min-height:105px;resize:vertical}
+.hint{font-size:11px;color:#87938c}
+.radio-row{display:flex;gap:8px;flex-wrap:wrap}
+.radio-row label{border:1px solid var(--line);padding:10px 13px;border-radius:10px;font-weight:550;cursor:pointer}
+.radio-row input{accent-color:var(--green)}
+.empty{border:1px dashed #cbd8cf;border-radius:15px;padding:28px;text-align:center;color:var(--muted);background:#fbfcfb}
+.empty b{display:block;color:var(--ink);margin-bottom:8px}
+.profile-box{background:white;border:1px solid var(--line);border-radius:18px;padding:25px;max-width:700px}
+.profile-head{display:flex;align-items:center;gap:16px;margin-bottom:20px}
+.avatar{width:54px;height:54px;border-radius:50%;background:var(--mint);display:grid;place-items:center;color:var(--green);font-size:22px;font-weight:850}
 footer{border-top:1px solid var(--line);padding:26px 24px;text-align:center;color:#87938c;font-size:12px;background:white}
-.modal-back{position:fixed;inset:0;background:#14251dcc;display:none;align-items:center;justify-content:center;padding:20px;z-index:10}.modal-back.show{display:flex}.modal{background:white;border-radius:18px;padding:26px;max-width:480px;width:100%;max-height:85vh;overflow:auto}.modal h2{margin:0 0 10px}.modal p{color:var(--muted);font-size:14px;line-height:1.6}.modal .field{margin:15px 0}
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#203b2d;color:white;padding:12px 18px;border-radius:12px;font-size:13px;display:none;z-index:20}.toast.show{display:block}
+.modal-back{position:fixed;inset:0;background:#14251dcc;display:none;align-items:center;justify-content:center;padding:20px;z-index:10}
+.modal-back.show{display:flex}
+.modal{background:white;border-radius:18px;padding:26px;max-width:480px;width:100%;max-height:85vh;overflow:auto}
+.modal h2{margin:0 0 10px}
+.modal p{color:var(--muted);font-size:14px;line-height:1.6}
+.modal .field{margin:15px 0}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#203b2d;color:white;padding:12px 18px;border-radius:12px;font-size:13px;display:none;z-index:20;max-width:90%;text-align:center}
+.toast.show{display:block}
 .hidden{display:none!important}
-@media(max-width:760px){header{padding:0 16px}nav{gap:10px}nav button{font-size:12px}.hero{grid-template-columns:1fr;padding:36px 25px}.hero-art{height:170px}.orb{width:140px;height:140px}.orbit{width:210px}.stats{gap:8px}.stat{padding:13px}.stat b{font-size:19px}.cards{grid-template-columns:1fr 1fr}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}}
-@media(max-width:520px){header{height:auto;min-height:66px;flex-wrap:wrap;padding:13px 16px;gap:8px}nav{width:100%;justify-content:space-between;order:2}nav button{padding:7px 0}.cards{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.stats .stat:last-child{grid-column:1/-1}main{padding:24px 16px 60px}}
+@media(max-width:760px){
+ header{padding:12px 16px}
+ nav{gap:10px}
+ nav button{font-size:12px}
+ .hero{grid-template-columns:1fr;padding:36px 25px}
+ .hero-art{height:170px}
+ .orb{width:140px;height:140px}
+ .orbit{width:210px}
+ .stats{gap:8px}
+ .stat{padding:13px}
+ .stat b{font-size:19px}
+ .cards{grid-template-columns:1fr 1fr}
+ .form-grid{grid-template-columns:1fr}
+ .field.full{grid-column:auto}
+}
+@media(max-width:520px){
+ header{min-height:66px;gap:8px}
+ nav{width:100%;justify-content:space-between;order:2}
+ nav button{padding:7px 0}
+ .cards{grid-template-columns:1fr}
+ .stats{grid-template-columns:1fr 1fr}
+ .stats .stat:last-child{grid-column:1/-1}
+ main{padding:24px 16px 60px}
+ .page-title h1{font-size:29px}
+}
 </style>
 </head>
 <body>
@@ -43,6 +124,7 @@ footer{border-top:1px solid var(--line);padding:26px 24px;text-align:center;colo
   </nav>
   <button class="btn small" id="loginBtn" onclick="openLogin()">로그인</button>
 </header>
+
 <main>
   <section id="homePage">
     <div class="hero">
@@ -50,22 +132,41 @@ footer{border-top:1px solid var(--line);padding:26px 24px;text-align:center;colo
         <div class="eyebrow">EXPERIENCE MEETS POSSIBILITY</div>
         <h1>서로 다른 경험이<br><span>새로운 가능성</span>이 됩니다.</h1>
         <p>세대와 분야의 경계를 넘어, 서로의 경험과 역량을 나누고 함께 프로젝트를 만들어 보세요.</p>
-        <div class="hero-actions"><button class="btn" onclick="go('explore')">프로젝트 둘러보기 →</button><button class="btn light" onclick="go('create')">내 프로젝트 시작하기</button></div>
+        <div class="hero-actions">
+          <button class="btn" onclick="go('explore')">프로젝트 둘러보기 →</button>
+          <button class="btn light" onclick="go('create')">내 프로젝트 시작하기</button>
+        </div>
       </div>
-      <div class="hero-art"><div class="orbit"></div><div class="orbit two"></div><div class="orb">E</div><div class="mini-tag tag-a">경험을 나누고</div><div class="mini-tag tag-b">가능성을 연결하다 ✦</div></div>
+      <div class="hero-art">
+        <div class="orbit"></div>
+        <div class="orbit two"></div>
+        <div class="orb">E</div>
+        <div class="mini-tag tag-a">경험을 나누고</div>
+        <div class="mini-tag tag-b">가능성을 연결하다 ✦</div>
+      </div>
     </div>
+
     <div class="stats">
       <div class="stat"><b id="statProjects">3</b><span>함께할 프로젝트</span></div>
       <div class="stat"><b>4가지</b><span>매칭 방식</span></div>
       <div class="stat"><b>ONE : ONE</b><span>연결에서 협업까지</span></div>
     </div>
-    <div class="section-head"><div><h2>함께할 프로젝트</h2><p>다양한 경험과 역량이 만나는 협업의 시작</p></div><button class="btn outline small" onclick="go('explore')">전체 보기</button></div>
+
+    <div class="section-head">
+      <div><h2>함께할 프로젝트</h2><p>다양한 경험과 역량이 만나는 협업의 시작</p></div>
+      <button class="btn outline small" onclick="go('explore')">전체 보기</button>
+    </div>
     <div class="cards" id="homeCards"></div>
   </section>
 
   <section id="explorePage" class="hidden">
-    <div class="page-title"><h1>프로젝트 찾기</h1><p>관심 분야와 협업 방식에 맞는 프로젝트를 찾아보세요.</p></div>
-    <div class="field"><input id="searchInput" placeholder="프로젝트 제목이나 분야 검색..." oninput="renderExplore()"></div>
+    <div class="page-title">
+      <h1>프로젝트 찾기</h1>
+      <p>관심 분야와 협업 방식에 맞는 프로젝트를 찾아보세요.</p>
+    </div>
+    <div class="field">
+      <input id="searchInput" placeholder="프로젝트 제목이나 분야 검색..." oninput="renderExplore()">
+    </div>
     <div class="filters" id="filters">
       <button class="chip active" data-filter="전체" onclick="setFilter('전체')">전체</button>
       <button class="chip" data-filter="IT·기술" onclick="setFilter('IT·기술')">IT·기술</button>
@@ -84,76 +185,683 @@ footer{border-top:1px solid var(--line);padding:26px 24px;text-align:center;colo
   </section>
 
   <section id="createPage" class="hidden">
-    <div class="page-title"><h1>프로젝트 등록</h1><p>함께 만들고 싶은 프로젝트와 필요한 역량을 소개해 주세요.</p></div>
+    <div class="page-title">
+      <h1>프로젝트 등록</h1>
+      <p>함께 만들고 싶은 프로젝트와 필요한 역량을 소개해 주세요.</p>
+    </div>
     <form class="panel" id="projectForm">
       <div class="form-grid">
-        <div class="field full"><label>프로젝트 제목 *</label><input name="title" required maxlength="55" placeholder="예: 우리 동네 가게 홍보 콘텐츠 만들기"></div>
-        <div class="field"><label>대표 분야 *</label><select name="category" required><option value="">분야 선택</option><option>IT·기술</option><option>디자인</option><option>마케팅</option><option>교육</option><option>경영·창업</option><option>문화·예술</option><option>기타</option></select></div>
-        <div class="field"><label>매칭 범위 *</label><select name="scope" required><option value="">범위 선택</option><option>1:1 개인 매칭</option><option>세대 간 매칭</option><option>그룹 매칭</option><option>분야별 매칭</option></select></div>
-        <div class="field"><label>모집 인원</label><select name="members"><option>2명</option><option>3~4명</option><option>5명 이상</option></select></div>
-        <div class="field"><label>프로젝트 진행 방식</label><select name="method"><option>온라인 중심</option><option>오프라인 중심</option><option>온라인·오프라인 병행</option></select></div>
-        <div class="field full"><label>프로젝트 소개 *</label><textarea name="description" required maxlength="500" placeholder="어떤 프로젝트를 하고 싶은지 자유롭게 작성해 주세요."></textarea></div>
-        <div class="field"><label>내가 제공할 수 있는 역량</label><input name="provide" placeholder="예: 콘텐츠 기획, 실무 경험"></div>
-        <div class="field"><label>상대방에게 필요한 역량</label><input name="need" placeholder="예: 영상 편집, 디자인"></div>
-        <div class="field full"><label>작성자 닉네임</label><input name="author" placeholder="로그인하지 않았다면 임시 닉네임"></div>
-        <div class="field full"><button class="btn" type="submit">프로젝트 게시하기</button><div class="hint">시제품에서는 게시글이 현재 브라우저에 저장됩니다.</div></div>
+        <div class="field full">
+          <label>프로젝트 제목 *</label>
+          <input name="title" required maxlength="55" placeholder="예: 우리 동네 가게 홍보 콘텐츠 만들기">
+        </div>
+        <div class="field">
+          <label>대표 분야 *</label>
+          <select name="category" required>
+            <option value="">분야 선택</option>
+            <option>IT·기술</option><option>디자인</option><option>마케팅</option>
+            <option>교육</option><option>경영·창업</option><option>문화·예술</option><option>기타</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>매칭 범위 *</label>
+          <select name="scope" required>
+            <option value="">범위 선택</option>
+            <option>1:1 개인 매칭</option><option>세대 간 매칭</option>
+            <option>그룹 매칭</option><option>분야별 매칭</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>모집 인원</label>
+          <select name="members"><option>2명</option><option>3~4명</option><option>5명 이상</option></select>
+        </div>
+        <div class="field">
+          <label>프로젝트 진행 방식</label>
+          <select name="method"><option>온라인 중심</option><option>오프라인 중심</option><option>온라인·오프라인 병행</option></select>
+        </div>
+        <div class="field full">
+          <label>프로젝트 소개 *</label>
+          <textarea name="description" required maxlength="500" placeholder="어떤 프로젝트를 하고 싶은지 자유롭게 작성해 주세요."></textarea>
+        </div>
+        <div class="field">
+          <label>내가 제공할 수 있는 역량</label>
+          <input name="provide" placeholder="예: 콘텐츠 기획, 실무 경험">
+        </div>
+        <div class="field">
+          <label>상대방에게 필요한 역량</label>
+          <input name="need" placeholder="예: 영상 편집, 디자인">
+        </div>
+        <div class="field full">
+          <label>작성자 닉네임</label>
+          <input name="author" placeholder="프로필을 저장하면 닉네임이 자동 적용됩니다.">
+        </div>
+        <div class="field full">
+          <button class="btn" type="submit">프로젝트 게시하기</button>
+          <div class="hint">프로젝트는 Supabase에 저장됩니다.</div>
+        </div>
       </div>
     </form>
   </section>
 
   <section id="profilePage" class="hidden">
-    <div class="page-title"><h1>내 프로필</h1><p>나의 관심 분야와 협업 역량을 설정해 보세요.</p></div>
+    <div class="page-title">
+      <h1>내 프로필</h1>
+      <p>나의 관심 분야와 협업 역량을 설정해 보세요.</p>
+    </div>
+
     <form class="profile-box" id="profileForm">
-      <div class="profile-head"><div class="avatar" id="avatarLetter">E</div><div><b id="profileName">방문자</b><div class="hint">나의 협업 프로필</div></div></div>
+      <div class="profile-head">
+        <div class="avatar" id="avatarLetter">E</div>
+        <div><b id="profileName">방문자</b><div class="hint">나의 협업 프로필</div></div>
+      </div>
       <div class="form-grid">
-        <div class="field"><label>닉네임 *</label><input name="nickname" required maxlength="20" placeholder="사용할 닉네임"></div>
-        <div class="field"><label>연령대</label><select name="age"><option>선택 안 함</option><option>청년층</option><option>장년층</option><option>기타</option></select></div>
-        <div class="field"><label>관심 분야</label><select name="interest"><option>IT·기술</option><option>디자인</option><option>마케팅</option><option>교육</option><option>경영·창업</option><option>문화·예술</option><option>기타</option></select></div>
-        <div class="field"><label>보유 역량</label><input name="skills" placeholder="예: 코딩, 기획, 상담"></div>
-        <div class="field full"><label>자기소개</label><textarea name="intro" placeholder="나의 경험과 함께하고 싶은 일을 소개해 주세요."></textarea></div>
-        <div class="field full"><button class="btn" type="submit">프로필 저장</button></div>
+        <div class="field">
+          <label>닉네임 *</label>
+          <input name="nickname" required maxlength="20" placeholder="사용할 닉네임">
+        </div>
+        <div class="field">
+          <label>연령대</label>
+          <select name="age"><option>선택 안 함</option><option>청년층</option><option>장년층</option><option>기타</option></select>
+        </div>
+        <div class="field">
+          <label>관심 분야</label>
+          <select name="interest">
+            <option>IT·기술</option><option>디자인</option><option>마케팅</option>
+            <option>교육</option><option>경영·창업</option><option>문화·예술</option><option>기타</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>보유 역량</label>
+          <input name="skills" placeholder="예: 코딩, 기획, 상담">
+        </div>
+        <div class="field full">
+          <label>자기소개</label>
+          <textarea name="intro" placeholder="나의 경험과 함께하고 싶은 일을 소개해 주세요."></textarea>
+        </div>
+        <div class="field full">
+          <button class="btn" type="submit">프로필 저장</button>
+        </div>
       </div>
     </form>
-    <div class="section-head"><div><h2>내가 보낸 대화 요청</h2><p>관심을 표현한 프로젝트 목록</p></div></div>
+
+    <div class="section-head">
+      <div><h2>내가 보낸 대화 요청</h2><p>관심을 표현한 프로젝트 목록</p></div>
+      <button class="btn outline small" onclick="refreshRequests()">새로고침</button>
+    </div>
     <div id="myRequests" class="empty">아직 보낸 요청이 없습니다.</div>
+
+    <div class="section-head">
+      <div><h2>받은 대화 요청</h2><p>내 프로젝트에 도착한 요청을 확인하세요.</p></div>
+      <button class="btn outline small" onclick="refreshRequests()">받은 요청 새로고침</button>
+    </div>
+    <div id="receivedRequests" class="empty">
+      받은 요청을 불러오는 중입니다.
+    </div>
   </section>
 </main>
-<footer>E:UM · 세대와 경험을 연결하는 협업 플랫폼<br><br>학교 프로젝트용 시제품입니다. 실명, 연락처, 주소 등 실제 개인정보를 입력하지 마세요.</footer>
 
-<div class="modal-back" id="modalBack" onclick="if(event.target===this)closeModal()"><div class="modal" id="modalContent"></div></div>
+<footer>
+  E:UM · 세대와 경험을 연결하는 협업 플랫폼
+  <br><br>
+  학교 프로젝트용 시제품입니다. 실명, 연락처, 주소 등 실제 개인정보를 입력하지 마세요.
+</footer>
+
+<div class="modal-back" id="modalBack" onclick="if(event.target===this)closeModal()">
+  <div class="modal" id="modalContent"></div>
+</div>
 <div class="toast" id="toast"></div>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="config.js"></script>
 <script>
-const seed=[
-{id:1,title:"지역 소상공인 홍보 콘텐츠 만들기",category:"마케팅",scope:"세대 간 매칭",members:"3~4명",method:"온라인·오프라인 병행",description:"지역의 작은 가게를 알릴 수 있는 카드뉴스와 짧은 홍보 영상을 함께 제작하고 싶습니다.",provide:"SNS 운영, 콘텐츠 기획",need:"그래픽 디자인, 영상 편집",author:"이음기획자"},
-{id:2,title:"초보 개발자를 위한 아이디어 멘토링",category:"IT·기술",scope:"1:1 개인 매칭",members:"2명",method:"온라인 중심",description:"웹사이트 제작을 시작한 사람들과 실무 경험 및 학습 방향을 나누는 프로젝트입니다.",provide:"웹 기초 지식, 아이디어",need:"개발 경험, 프로젝트 조언",author:"코드새싹"},
-{id:3,title:"세대가 함께 만드는 동네 기록집",category:"디자인",scope:"그룹 매칭",members:"5명 이상",method:"온라인·오프라인 병행",description:"동네의 오래된 장소와 이야기를 모아 사진과 글로 기록하는 프로젝트입니다.",provide:"인터뷰, 글쓰기",need:"사진 촬영, 편집 디자인",author:"동네기록단"}
+const seed = [
+  {
+    id:1,
+    title:"지역 소상공인 홍보 콘텐츠 만들기",
+    category:"마케팅",
+    scope:"세대 간 매칭",
+    members:"3~4명",
+    method:"온라인·오프라인 병행",
+    description:"지역의 작은 가게를 알릴 수 있는 카드뉴스와 짧은 홍보 영상을 함께 제작하고 싶습니다.",
+    provide:"SNS 운영, 콘텐츠 기획",
+    need:"그래픽 디자인, 영상 편집",
+    author:"이음기획자"
+  },
+  {
+    id:2,
+    title:"초보 개발자를 위한 아이디어 멘토링",
+    category:"IT·기술",
+    scope:"1:1 개인 매칭",
+    members:"2명",
+    method:"온라인 중심",
+    description:"웹사이트 제작을 시작한 사람들과 실무 경험 및 학습 방향을 나누는 프로젝트입니다.",
+    provide:"웹 기초 지식, 아이디어",
+    need:"개발 경험, 프로젝트 조언",
+    author:"코드새싹"
+  },
+  {
+    id:3,
+    title:"세대가 함께 만드는 동네 기록집",
+    category:"디자인",
+    scope:"그룹 매칭",
+    members:"5명 이상",
+    method:"온라인·오프라인 병행",
+    description:"동네의 오래된 장소와 이야기를 모아 사진과 글로 기록하는 프로젝트입니다.",
+    provide:"인터뷰, 글쓰기",
+    need:"사진 촬영, 편집 디자인",
+    author:"동네기록단"
+  }
 ];
-let projects=[...seed],profile=null,requests=[],activeCategory="전체",activeScope="전체",sb=null,user=null;
-const $=id=>document.getElementById(id);
-const configured=window.EUM_CONFIG && window.EUM_CONFIG.SUPABASE_URL && window.EUM_CONFIG.SUPABASE_ANON_KEY && !window.EUM_CONFIG.SUPABASE_URL.includes("여기에");
-function esc(s=""){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-function toast(s){$("toast").textContent=s;$("toast").classList.add("show");setTimeout(()=>$ ("toast").classList.remove("show"),2400)}
-function showModal(html){$("modalContent").innerHTML=html;$("modalBack").classList.add("show")}
-function closeModal(){$("modalBack").classList.remove("show")}
-function go(page){["home","explore","create","profile"].forEach(p=>{$(p+"Page").classList.toggle("hidden",p!==page);$("nav-"+p).classList.toggle("active",p===page)});if(page==="explore")renderExplore();if(page==="home")renderHome();if(page==="profile")renderProfile();window.scrollTo({top:0,behavior:"smooth"})}
-function card(p){return `<article class="project-card"><div class="card-top"><span class="pill">${esc(p.scope)}</span><span class="hint">${esc(p.category)}</span></div><h3>${esc(p.title)}</h3><p>${esc(p.description)}</p><div class="meta">모집 ${esc(p.members)} · ${esc(p.method)}<br>작성자 ${esc(p.author||"익명")}</div><div class="card-actions"><button class="btn outline small" onclick="detail(${p.id})">자세히 보기</button><button class="btn small" onclick="requestProject(${p.id})">대화 요청</button></div></article>`}
-function renderHome(){$("homeCards").innerHTML=projects.slice(0,3).map(card).join("");$("statProjects").textContent=projects.length}
-function renderExplore(){let q=($("searchInput")?.value||"").toLowerCase();let list=projects.filter(p=>(activeCategory==="전체"||p.category===activeCategory)&&(activeScope==="전체"||p.scope===activeScope)&&(`${p.title} ${p.description} ${p.category} ${p.need} ${p.provide}`).toLowerCase().includes(q));$("exploreCards").innerHTML=list.length?list.map(card).join(""):`<div class="empty" style="grid-column:1/-1"><b>검색 결과가 없습니다.</b>다른 검색어나 필터를 선택해 보세요.</div>`}
-function setFilter(v){activeCategory=v;document.querySelectorAll("[data-filter]").forEach(b=>b.classList.toggle("active",b.dataset.filter===v));renderExplore()}
-function setScope(v){activeScope=v;document.querySelectorAll("[data-scope]").forEach(b=>b.classList.toggle("active",b.dataset.scope===v));renderExplore()}
-function detail(id){let p=projects.find(x=>x.id===id);if(!p)return;showModal(`<span class="pill">${esc(p.scope)}</span><h2 style="margin-top:15px">${esc(p.title)}</h2><p>${esc(p.description)}</p><hr style="border:0;border-top:1px solid #e7ece8"><p><b>분야</b>　${esc(p.category)}<br><b>모집 인원</b>　${esc(p.members)}<br><b>진행 방식</b>　${esc(p.method)}<br><b>제공 역량</b>　${esc(p.provide||"미입력")}<br><b>필요 역량</b>　${esc(p.need||"미입력")}<br><b>작성자</b>　${esc(p.author||"익명")}</p><button class="btn" onclick="requestProject(${p.id})">대화 요청하기</button> <button class="btn outline" onclick="closeModal()">닫기</button>`)}
-async function requestProject(id){if(!sb){toast("공용 데이터베이스 설정 후 사용할 수 있습니다.");return}let p=projects.find(x=>x.id===id);if(!p)return;if(!profile){toast("먼저 내 프로필에서 닉네임을 저장해 주세요.");go("profile");return}showModal(`<h2>대화 요청하기</h2><p><b>${esc(p.title)}</b> 프로젝트에 관심을 표현해 보세요.</p><div class="field"><label>요청 닉네임</label><input id="requestName" value="${esc(profile.nickname)}" maxlength="20"></div><div class="field"><label>요청 메시지</label><textarea id="requestMessage" placeholder="함께하고 싶은 이유와 나의 역량을 소개해 주세요."></textarea></div><button class="btn" onclick="sendRequest(${p.id})">요청 보내기</button> <button class="btn outline" onclick="closeModal()">취소</button>`)}
-async function sendRequest(projectId){let name=$("requestName").value.trim()||profile?.nickname||"사용자",msg=$("requestMessage").value.trim();if(!msg){toast("요청 메시지를 작성해 주세요.");return}let {error}=await sb.from("match_requests").insert({project_id:projectId,sender_id:user.id,sender_name:name,message:msg});if(error){toast("요청 저장 실패: "+error.message);return}closeModal();toast("대화 요청을 보냈습니다.");await loadRequests();renderProfile()}
-function openLogin(){go("profile");toast("프로필에서 닉네임과 역량을 등록해 주세요.")}
-async function renderProfile(){if(profile){$("profileName").textContent=profile.nickname;$("avatarLetter").textContent=profile.nickname.slice(0,1);$("loginBtn").textContent=profile.nickname;let f=$("profileForm");["nickname","age","interest","skills","intro"].forEach(k=>{if(f.elements[k]&&profile[k])f.elements[k].value=profile[k]})}else{$("profileName").textContent="프로필 미등록";$("loginBtn").textContent="프로필 등록"}let mine=requests.filter(r=>r.sender_id===user?.id);$("myRequests").innerHTML=mine.length?mine.map(r=>{let p=projects.find(x=>x.id===r.project_id);return `<div class="project-card" style="margin-bottom:10px;min-height:0"><b>${esc(p?.title||"프로젝트")}</b><p>${esc(r.message)}</p><span class="pill">${esc(r.status||"요청 대기")}</span></div>`}).join(""):`<div class="empty">아직 보낸 요청이 없습니다.</div>`}
-async function loadProjects(){let {data,error}=await sb.from("projects").select("*").order("created_at",{ascending:false});if(error){toast("프로젝트를 불러오지 못했습니다. SQL 설정을 확인해 주세요.");return}projects=data||[];renderHome();renderExplore()}
-async function loadProfile(){let {data,error}=await sb.from("profiles").select("*").eq("id",user.id).maybeSingle();if(error){console.error(error);return}profile=data}
-async function loadRequests(){let {data,error}=await sb.from("match_requests").select("*").order("created_at",{ascending:false});if(!error)requests=data||[]}
-async function init(){if(!configured){$("homeCards").innerHTML=seed.map(card).join("");toast("배포 설정 전 미리보기 모드입니다. config.js를 설정하면 공동 저장이 활성화됩니다.");return}try{sb=window.supabase.createClient(window.EUM_CONFIG.SUPABASE_URL,window.EUM_CONFIG.SUPABASE_ANON_KEY);let {data,error}=await sb.auth.getSession();if(error)throw error;user=data.session?.user||null;if(!user){let auth=await sb.auth.signInAnonymously();if(auth.error)throw auth.error;user=auth.data.user}await loadProjects();await loadProfile();await loadRequests();renderProfile();renderHome();renderExplore()}catch(e){console.error(e);toast("연결에 실패했습니다. Supabase 설정과 익명 로그인을 확인해 주세요.")}}
-$("projectForm").addEventListener("submit",async e=>{e.preventDefault();if(!sb){toast("먼저 Supabase 설정을 완료해 주세요.");return}if(!profile){toast("먼저 내 프로필을 저장해 주세요.");go("profile");return}let d=Object.fromEntries(new FormData(e.target).entries());let {error}=await sb.from("projects").insert({...d,owner_id:user.id,author:profile.nickname});if(error){toast("등록 실패: "+error.message);return}e.target.reset();await loadProjects();toast("프로젝트가 모두에게 공개되었습니다.");go("explore")});
-$("profileForm").addEventListener("submit",async e=>{e.preventDefault();if(!sb){toast("먼저 Supabase 설정을 완료해 주세요.");return}let d=Object.fromEntries(new FormData(e.target).entries());let {error}=await sb.from("profiles").upsert({id:user.id,...d});if(error){toast("프로필 저장 실패: "+error.message);return}profile={id:user.id,...d};$("loginBtn").textContent=profile.nickname;toast("프로필을 저장했습니다.");renderProfile()});
+
+let projects = [...seed];
+let profile = null;
+let requests = [];
+let activeCategory = "전체";
+let activeScope = "전체";
+let sb = null;
+let user = null;
+
+const $ = id => document.getElementById(id);
+
+const configured =
+  window.EUM_CONFIG &&
+  window.EUM_CONFIG.SUPABASE_URL &&
+  window.EUM_CONFIG.SUPABASE_ANON_KEY &&
+  !window.EUM_CONFIG.SUPABASE_URL.includes("여기에");
+
+function esc(s = "") {
+  return String(s).replace(/[&<>"']/g, c => ({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#39;"
+  }[c]));
+}
+
+function toast(s) {
+  $("toast").textContent = s;
+  $("toast").classList.add("show");
+  setTimeout(() => $("toast").classList.remove("show"), 2800);
+}
+
+function showModal(html) {
+  $("modalContent").innerHTML = html;
+  $("modalBack").classList.add("show");
+}
+
+function closeModal() {
+  $("modalBack").classList.remove("show");
+}
+
+function go(page) {
+  ["home","explore","create","profile"].forEach(p => {
+    $(p + "Page").classList.toggle("hidden", p !== page);
+    $("nav-" + p).classList.toggle("active", p === page);
+  });
+
+  if (page === "explore") renderExplore();
+  if (page === "home") renderHome();
+  if (page === "profile") renderProfile();
+
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+function card(p) {
+  return `
+    <article class="project-card">
+      <div class="card-top">
+        <span class="pill">${esc(p.scope)}</span>
+        <span class="hint">${esc(p.category)}</span>
+      </div>
+      <h3>${esc(p.title)}</h3>
+      <p>${esc(p.description)}</p>
+      <div class="meta">
+        모집 ${esc(p.members)} · ${esc(p.method)}<br>
+        작성자 ${esc(p.author || "익명")}
+      </div>
+      <div class="card-actions">
+        <button class="btn outline small" onclick="detail('${String(p.id)}')">자세히 보기</button>
+        <button class="btn small" onclick="requestProject('${String(p.id)}')">대화 요청</button>
+      </div>
+    </article>`;
+}
+
+function renderHome() {
+  $("homeCards").innerHTML = projects.slice(0,3).map(card).join("");
+  $("statProjects").textContent = projects.length;
+}
+
+function renderExplore() {
+  const q = ($("searchInput")?.value || "").toLowerCase();
+
+  const list = projects.filter(p =>
+    (activeCategory === "전체" || p.category === activeCategory) &&
+    (activeScope === "전체" || p.scope === activeScope) &&
+    (`${p.title} ${p.description} ${p.category} ${p.need} ${p.provide}`)
+      .toLowerCase().includes(q)
+  );
+
+  $("exploreCards").innerHTML = list.length
+    ? list.map(card).join("")
+    : `<div class="empty" style="grid-column:1/-1">
+         <b>검색 결과가 없습니다.</b>
+         다른 검색어나 필터를 선택해 보세요.
+       </div>`;
+}
+
+function setFilter(v) {
+  activeCategory = v;
+  document.querySelectorAll("[data-filter]").forEach(b =>
+    b.classList.toggle("active", b.dataset.filter === v)
+  );
+  renderExplore();
+}
+
+function setScope(v) {
+  activeScope = v;
+  document.querySelectorAll("[data-scope]").forEach(b =>
+    b.classList.toggle("active", b.dataset.scope === v)
+  );
+  renderExplore();
+}
+
+function detail(id) {
+  const p = projects.find(x => String(x.id) === String(id));
+  if (!p) return;
+
+  showModal(`
+    <span class="pill">${esc(p.scope)}</span>
+    <h2 style="margin-top:15px">${esc(p.title)}</h2>
+    <p>${esc(p.description)}</p>
+    <hr style="border:0;border-top:1px solid #e7ece8">
+    <p>
+      <b>분야</b>　${esc(p.category)}<br>
+      <b>모집 인원</b>　${esc(p.members)}<br>
+      <b>진행 방식</b>　${esc(p.method)}<br>
+      <b>제공 역량</b>　${esc(p.provide || "미입력")}<br>
+      <b>필요 역량</b>　${esc(p.need || "미입력")}<br>
+      <b>작성자</b>　${esc(p.author || "익명")}
+    </p>
+    <button class="btn" onclick="requestProject('${String(p.id)}')">대화 요청하기</button>
+    <button class="btn outline" onclick="closeModal()">닫기</button>
+  `);
+}
+
+async function requestProject(id) {
+  if (!sb) {
+    toast("Supabase 설정을 확인해 주세요.");
+    return;
+  }
+
+  const p = projects.find(x => String(x.id) === String(id));
+  if (!p) return;
+
+  if (!user) {
+    toast("로그인 정보를 확인할 수 없습니다. 페이지를 새로고침해 주세요.");
+    return;
+  }
+
+  if (!profile) {
+    toast("먼저 내 프로필에서 닉네임을 저장해 주세요.");
+    go("profile");
+    return;
+  }
+
+  if (p.owner_id && p.owner_id === user.id) {
+    toast("자신이 등록한 프로젝트에는 요청을 보낼 수 없습니다.");
+    return;
+  }
+
+  showModal(`
+    <h2>대화 요청하기</h2>
+    <p><b>${esc(p.title)}</b> 프로젝트에 관심을 표현해 보세요.</p>
+    <div class="field">
+      <label>요청 닉네임</label>
+      <input id="requestName" value="${esc(profile.nickname)}" maxlength="20">
+    </div>
+    <div class="field">
+      <label>요청 메시지</label>
+      <textarea id="requestMessage" placeholder="함께하고 싶은 이유와 나의 역량을 소개해 주세요."></textarea>
+    </div>
+    <button class="btn" onclick="sendRequest('${String(p.id)}')">요청 보내기</button>
+    <button class="btn outline" onclick="closeModal()">취소</button>
+  `);
+}
+
+async function sendRequest(projectId) {
+  const name = $("requestName").value.trim() || profile?.nickname || "사용자";
+  const msg = $("requestMessage").value.trim();
+
+  if (!msg) {
+    toast("요청 메시지를 작성해 주세요.");
+    return;
+  }
+
+  if (!sb || !user) {
+    toast("로그인 연결을 확인해 주세요.");
+    return;
+  }
+
+  const project = projects.find(p => String(p.id) === String(projectId));
+
+  if (!project) {
+    toast("프로젝트를 찾을 수 없습니다. 새로고침해 주세요.");
+    return;
+  }
+
+  if (project.owner_id === user.id) {
+    toast("자신이 등록한 프로젝트에는 요청할 수 없습니다.");
+    return;
+  }
+
+  const {data: existing, error: checkError} = await sb
+    .from("match_requests")
+    .select("id")
+    .eq("project_id", projectId)
+    .eq("sender_id", user.id)
+    .maybeSingle();
+
+  if (checkError) {
+    toast("기존 요청 확인 실패: " + checkError.message);
+    return;
+  }
+
+  if (existing) {
+    toast("이 프로젝트에는 이미 대화 요청을 보냈습니다.");
+    return;
+  }
+
+  const {error} = await sb
+    .from("match_requests")
+    .insert({
+      project_id: projectId,
+      sender_id: user.id,
+      sender_name: name,
+      message: msg
+    });
+
+  if (error) {
+    toast("요청 저장 실패: " + error.message);
+    return;
+  }
+
+  closeModal();
+  toast("대화 요청을 보냈습니다.");
+  await refreshRequests();
+}
+
+function openLogin() {
+  go("profile");
+  toast("프로필에서 닉네임과 역량을 등록해 주세요.");
+}
+
+/* 프로필과 받은 요청 목록을 화면에 표시 */
+function renderProfile() {
+  if (profile) {
+    $("profileName").textContent = profile.nickname || "사용자";
+    $("avatarLetter").textContent = (profile.nickname || "E").slice(0,1);
+    $("loginBtn").textContent = profile.nickname || "내 프로필";
+
+    const f = $("profileForm");
+    ["nickname","age","interest","skills","intro"].forEach(k => {
+      if (f.elements[k] && profile[k] != null) {
+        f.elements[k].value = profile[k];
+      }
+    });
+  } else {
+    $("profileName").textContent = "프로필 미등록";
+    $("loginBtn").textContent = "프로필 등록";
+  }
+
+  if (!user) {
+    $("myRequests").innerHTML = `<div class="empty">로그인 정보를 확인할 수 없습니다.</div>`;
+    $("receivedRequests").innerHTML = `<div class="empty">로그인 정보를 확인할 수 없습니다.</div>`;
+    return;
+  }
+
+  const mine = requests.filter(r => r.sender_id === user.id);
+
+  $("myRequests").innerHTML = mine.length
+    ? mine.map(r => {
+        const p = projects.find(x => String(x.id) === String(r.project_id));
+        return `
+          <div class="project-card" style="margin-bottom:10px;min-height:0">
+            <div class="card-top">
+              <b>${esc(p?.title || "프로젝트")}</b>
+              <span class="pill">${esc(r.status || "요청 대기")}</span>
+            </div>
+            <p>${esc(r.message || "")}</p>
+          </div>`;
+      }).join("")
+    : `<div class="empty">아직 보낸 요청이 없습니다.</div>`;
+
+  /*
+   * 내가 등록한 프로젝트에 도착한 요청만 표시한다.
+   * requests는 Supabase RLS 정책으로 허용된 행만 가져온다.
+   */
+  const incoming = requests.filter(r => {
+    const p = projects.find(x => String(x.id) === String(r.project_id));
+    return p &&
+      p.owner_id === user.id &&
+      r.sender_id !== user.id;
+  });
+
+  $("receivedRequests").innerHTML = incoming.length
+    ? incoming.map(r => {
+        const p = projects.find(x => String(x.id) === String(r.project_id));
+        return `
+          <div class="project-card" style="margin-bottom:12px;min-height:0">
+            <div class="card-top">
+              <span class="pill">받은 요청</span>
+              <span class="pill gold">${esc(r.status || "요청 대기")}</span>
+            </div>
+            <h3>${esc(p?.title || "내 프로젝트")}</h3>
+            <p><b>보낸 사람:</b> ${esc(r.sender_name || "사용자")}</p>
+            <p><b>요청 메시지</b><br>${esc(r.message || "")}</p>
+            <div class="hint">요청 ID: ${esc(r.id)}</div>
+          </div>`;
+      }).join("")
+    : `<div class="empty">
+         <b>아직 받은 대화 요청이 없습니다.</b>
+         다른 사용자가 내 프로젝트에 요청을 보내면 여기에 표시됩니다.
+       </div>`;
+}
+
+/* 프로젝트와 요청을 다시 불러온다 */
+async function refreshRequests() {
+  if (!sb || !user) {
+    toast("데이터베이스 연결을 확인해 주세요.");
+    return;
+  }
+
+  $("receivedRequests").innerHTML = `<div class="empty">요청을 불러오는 중입니다...</div>`;
+
+  const {data: projectData, error: projectError} = await sb
+    .from("projects")
+    .select("*")
+    .order("created_at", {ascending:false});
+
+  if (projectError) {
+    console.error("프로젝트 조회 오류:", projectError);
+    toast("프로젝트 조회 실패: " + projectError.message);
+    return;
+  }
+
+  projects = projectData || [];
+
+  const {data: requestData, error: requestError} = await sb
+    .from("match_requests")
+    .select("*")
+    .order("created_at", {ascending:false});
+
+  if (requestError) {
+    console.error("요청 조회 오류:", requestError);
+    $("receivedRequests").innerHTML = `
+      <div class="empty">
+        <b>받은 요청을 불러오지 못했습니다.</b>
+        ${esc(requestError.message)}
+      </div>`;
+    toast("요청 조회 실패: " + requestError.message);
+    return;
+  }
+
+  requests = requestData || [];
+  renderProfile();
+  renderHome();
+  renderExplore();
+  toast("대화 요청 목록을 새로고침했습니다.");
+}
+
+async function loadProjects() {
+  const {data, error} = await sb
+    .from("projects")
+    .select("*")
+    .order("created_at", {ascending:false});
+
+  if (error) {
+    toast("프로젝트를 불러오지 못했습니다: " + error.message);
+    return;
+  }
+
+  projects = data || [];
+  renderHome();
+  renderExplore();
+}
+
+async function loadProfile() {
+  const {data, error} = await sb
+    .from("profiles")
+    .select("*")
+    .eq("id", user.id)
+    .maybeSingle();
+
+  if (error) {
+    console.error("프로필 조회 오류:", error);
+    return;
+  }
+
+  profile = data;
+}
+
+async function loadRequests() {
+  const {data, error} = await sb
+    .from("match_requests")
+    .select("*")
+    .order("created_at", {ascending:false});
+
+  if (error) {
+    console.error("대화 요청 조회 오류:", error);
+    requests = [];
+    return;
+  }
+
+  requests = data || [];
+}
+
+async function init() {
+  if (!configured) {
+    $("homeCards").innerHTML = seed.map(card).join("");
+    $("exploreCards").innerHTML = seed.map(card).join("");
+    $("receivedRequests").innerHTML = `
+      <div class="empty">
+        Supabase 설정을 완료하면 받은 요청을 확인할 수 있습니다.
+      </div>`;
+    toast("config.js의 Supabase 설정을 확인해 주세요.");
+    return;
+  }
+
+  try {
+    sb = window.supabase.createClient(
+      window.EUM_CONFIG.SUPABASE_URL,
+      window.EUM_CONFIG.SUPABASE_ANON_KEY
+    );
+
+    const {data, error} = await sb.auth.getSession();
+    if (error) throw error;
+
+    user = data.session?.user || null;
+
+    if (!user) {
+      const auth = await sb.auth.signInAnonymously();
+      if (auth.error) throw auth.error;
+      user = auth.data.user;
+    }
+
+    await loadProjects();
+    await loadProfile();
+    await loadRequests();
+
+    renderProfile();
+    renderHome();
+    renderExplore();
+  } catch (e) {
+    console.error("초기화 오류:", e);
+    toast("연결 실패: " + (e.message || "Supabase 설정을 확인해 주세요."));
+  }
+}
+
+/* 프로젝트 등록 */
+$("projectForm").addEventListener("submit", async e => {
+  e.preventDefault();
+
+  if (!sb || !user) {
+    toast("먼저 Supabase 연결을 완료해 주세요.");
+    return;
+  }
+
+  if (!profile) {
+    toast("먼저 내 프로필을 저장해 주세요.");
+    go("profile");
+    return;
+  }
+
+  const d = Object.fromEntries(new FormData(e.target).entries());
+
+  const {error} = await sb.from("projects").insert({
+    ...d,
+    owner_id: user.id,
+    author: profile.nickname
+  });
+
+  if (error) {
+    toast("프로젝트 등록 실패: " + error.message);
+    return;
+  }
+
+  e.target.reset();
+  await loadProjects();
+  toast("프로젝트가 등록되었습니다.");
+  go("explore");
+});
+
+/* 프로필 저장 */
+$("profileForm").addEventListener("submit", async e => {
+  e.preventDefault();
+
+  if (!sb || !user) {
+    toast("먼저 Supabase 연결을 완료해 주세요.");
+    return;
+  }
+
+  const d = Object.fromEntries(new FormData(e.target).entries());
+
+  const {error} = await sb.from("profiles").upsert({
+    id: user.id,
+    ...d
+  });
+
+  if (error) {
+    toast("프로필 저장 실패: " + error.message);
+    return;
+  }
+
+  profile = {id:user.id, ...d};
+  $("loginBtn").textContent = profile.nickname;
+  toast("프로필을 저장했습니다.");
+  renderProfile();
+});
+
 init();
 </script>
 </body>
