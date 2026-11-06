@@ -1,1497 +1,743 @@
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>E:UM</title>
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>E:UM | 세대와 세대를 잇다</title>
 <style>
-:root{
-  --green:#245b46;
-  --green2:#34765b;
-  --mint:#eaf2ed;
-  --ink:#202a25;
-  --muted:#718078;
-  --line:#e4eae6;
-  --bg:#f7f9f7;
-}
-
+:root{--g:#245b46;--g2:#34765b;--mint:#eaf2ed;--ink:#202a25;--muted:#718078;--line:#e4eae6;--bg:#f7f9f7}
 *{box-sizing:border-box}
-
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--ink);
-  font-family:Arial,"Noto Sans KR",sans-serif;
-}
-
-button,input,select,textarea{font:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,"Noto Sans KR",sans-serif}
+button,input,textarea,select{font:inherit}
 button{cursor:pointer}
-
-header{
-  background:white;
-  border-bottom:1px solid var(--line);
-  padding:14px 5%;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  flex-wrap:wrap;
-  gap:12px;
-  position:sticky;
-  top:0;
-  z-index:5;
-}
-
-.logo{
-  font-size:25px;
-  font-weight:900;
-  color:var(--green);
-  cursor:pointer;
-}
-
-nav{
-  display:flex;
-  gap:15px;
-  flex-wrap:wrap;
-}
-
-nav button{
-  border:0;
-  background:none;
-  padding:9px 3px;
-  color:#536158;
-  font-weight:bold;
-}
-
-nav button.active{
-  color:var(--green);
-  border-bottom:2px solid var(--green);
-}
-
-.btn{
-  border:0;
-  background:var(--green);
-  color:white;
-  border-radius:9px;
-  padding:11px 15px;
-  font-weight:bold;
-}
-
-.btn:hover{background:var(--green2)}
-
-.btn.light{
-  background:var(--mint);
-  color:var(--green);
-}
-
-.btn.outline{
-  background:white;
-  color:var(--green);
-  border:1px solid #cbd9d0;
-}
-
-.btn.danger{background:#9b3d3d}
-
-.btn.small{
-  padding:8px 11px;
-  font-size:12px;
-}
-
-main{
-  max-width:1120px;
-  margin:auto;
-  padding:30px 22px 70px;
-}
-
-.hero{
-  background:linear-gradient(115deg,#eaf2ed,#f5f7f2);
-  border-radius:23px;
-  padding:50px 6%;
-  display:grid;
-  grid-template-columns:1.2fr .8fr;
-  gap:20px;
-  align-items:center;
-}
-
-.eyebrow{
-  color:var(--green2);
-  font-size:12px;
-  letter-spacing:2px;
-  font-weight:bold;
-}
-
-h1{
-  font-size:clamp(32px,5vw,50px);
-  line-height:1.2;
-  margin:16px 0;
-}
-
-.hero h1 span{color:var(--green)}
-
-.hero p{
-  color:#627168;
-  line-height:1.8;
-}
-
-.hero-art{
-  display:grid;
-  place-items:center;
-  height:190px;
-}
-
-.orb{
-  width:150px;
-  height:150px;
-  border-radius:50%;
-  background:#d4e5d9;
-  display:grid;
-  place-items:center;
-  color:var(--green);
-  font-size:55px;
-  font-weight:900;
-}
-
-.stats{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:14px;
-  margin:20px 0 35px;
-}
-
-.stat,.project-card,.request-card,.panel{
-  background:white;
-  border:1px solid var(--line);
-  border-radius:15px;
-  padding:18px;
-}
-
-.stat b{
-  display:block;
-  font-size:23px;
-  color:var(--green);
-}
-
-.stat span{
-  font-size:12px;
-  color:var(--muted);
-}
-
-.section-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin:30px 0 15px;
-  gap:10px;
-}
-
-.section-head h2{margin:0}
-
-.section-head p{
-  font-size:13px;
-  color:var(--muted);
-}
-
-.cards{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
-}
-
-.project-card{
-  display:flex;
-  flex-direction:column;
-  min-height:240px;
-}
-
-.project-card h3{font-size:17px}
-
-.project-card p{
-  color:var(--muted);
-  font-size:13px;
-  line-height:1.7;
-}
-
-.pill{
-  background:var(--mint);
-  color:var(--green);
-  padding:6px 9px;
-  border-radius:30px;
-  font-size:11px;
-  font-weight:bold;
-}
-
-.meta{
-  margin-top:auto;
-  padding:12px 0;
-  border-top:1px solid #edf0ed;
-  font-size:12px;
-  color:var(--muted);
-}
-
-.card-actions{
-  display:flex;
-  gap:8px;
-}
-
-.card-actions button{flex:1}
-
-.page-title{margin-bottom:25px}
-
-.page-title h1{
-  font-size:32px;
-  margin:0 0 8px;
-}
-
-.page-title p{
-  color:var(--muted);
-}
-
-.form-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:16px;
-}
-
-.field{
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-}
-
-.field.full{grid-column:1/-1}
-
-.field label{
-  font-size:13px;
-  font-weight:bold;
-}
-
-.field input,
-.field select,
-.field textarea{
-  width:100%;
-  border:1px solid #dce4de;
-  border-radius:10px;
-  padding:12px;
-  background:white;
-}
-
-.field textarea{
-  min-height:95px;
-  resize:vertical;
-}
-
-.profile-box{
-  background:white;
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:24px;
-  max-width:800px;
-}
-
-.profile-head{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  margin-bottom:20px;
-}
-
-.avatar{
-  width:50px;
-  height:50px;
-  border-radius:50%;
-  background:var(--mint);
-  display:grid;
-  place-items:center;
-  color:var(--green);
-  font-weight:bold;
-  font-size:22px;
-}
-
-.empty{
-  background:white;
-  border:1px dashed #cbd8cf;
-  border-radius:14px;
-  padding:25px;
-  text-align:center;
-  color:var(--muted);
-}
-
-.request-card{margin-bottom:12px}
-
-.request-card p{
-  color:var(--muted);
-  font-size:13px;
-  line-height:1.6;
-}
-
-.hint{
-  color:var(--muted);
-  font-size:12px;
-}
-
-.filters{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-  margin:14px 0;
-}
-
-.chip{
-  border:1px solid var(--line);
-  background:white;
-  border-radius:25px;
-  padding:8px 13px;
-  font-size:12px;
-}
-
-.chip.active{
-  background:var(--green);
-  color:white;
-}
-
-.chat-layout{
-  display:grid;
-  grid-template-columns:260px 1fr;
-  gap:14px;
-  min-height:450px;
-}
-
-.chat-list{
-  background:white;
-  border:1px solid var(--line);
-  border-radius:15px;
-  padding:12px;
-}
-
-.chat-person{
-  display:block;
-  width:100%;
-  text-align:left;
-  background:white;
-  border:1px solid var(--line);
-  border-radius:10px;
-  padding:12px;
-  margin-bottom:8px;
-  color:var(--ink);
-}
-
-.chat-person.active{
-  background:var(--mint);
-  border-color:var(--green);
-}
-
-.chat-window{
-  background:white;
-  border:1px solid var(--line);
-  border-radius:15px;
-  display:flex;
-  flex-direction:column;
-  min-height:450px;
-  overflow:hidden;
-}
-
-.chat-head{
-  padding:16px;
-  border-bottom:1px solid var(--line);
-  font-weight:bold;
-}
-
-.messages{
-  padding:15px;
-  flex:1;
-  overflow:auto;
-  max-height:450px;
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-}
-
-.bubble{
-  max-width:85%;
-  padding:11px 14px;
-  border-radius:14px;
-  background:#f0f3f0;
-  align-self:flex-start;
-  overflow-wrap:anywhere;
-  white-space:pre-wrap;
-  font-size:14px;
-}
-
-.bubble.mine{
-  background:var(--mint);
-  align-self:flex-end;
-}
-
-.bubble small{
-  display:block;
-  font-size:10px;
-  color:var(--muted);
-  margin-top:5px;
-}
-
-.chat-send{
-  display:flex;
-  gap:8px;
-  padding:12px;
-  border-top:1px solid var(--line);
-}
-
-.chat-send textarea{
-  flex:1;
-  min-height:42px;
-  max-height:110px;
-  border:1px solid var(--line);
-  border-radius:10px;
-  padding:10px;
-  resize:vertical;
-}
-
-.modal-back{
-  position:fixed;
-  inset:0;
-  background:#14251dcc;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:18px;
-  z-index:10;
-}
-
-.modal-back.show{display:flex}
-
-.modal{
-  background:white;
-  border-radius:18px;
-  padding:24px;
-  max-width:520px;
-  width:100%;
-  max-height:88vh;
-  overflow:auto;
-}
-
-.toast{
-  position:fixed;
-  bottom:22px;
-  left:50%;
-  transform:translateX(-50%);
-  background:#203b2d;
-  color:white;
-  padding:12px 18px;
-  border-radius:12px;
-  display:none;
-  z-index:20;
-  max-width:92%;
-}
-
-.toast.show{display:block}
-
+header{background:white;border-bottom:1px solid var(--line);padding:15px 5%;display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap;position:sticky;top:0;z-index:5}
+.logo{font-size:25px;font-weight:900;color:var(--g);cursor:pointer}
+nav{display:flex;gap:8px;flex-wrap:wrap}
+nav button{border:0;background:none;padding:9px;color:#526158}
+nav button.active{color:var(--g);font-weight:bold}
+main{max-width:1100px;margin:auto;padding:30px 20px 70px}
+button.primary,.primary{background:var(--g);color:white;border:0;border-radius:9px;padding:11px 15px;font-weight:bold}
+button.secondary{background:var(--mint);color:var(--g);border:1px solid #cbd9d0;border-radius:9px;padding:10px 13px}
+button.danger{background:#fff0f0;color:#a22;border:1px solid #f1cccc;border-radius:9px;padding:9px 12px}
+input,select,textarea{width:100%;padding:11px;border:1px solid #dce4de;border-radius:9px;background:white}
+textarea{min-height:100px;resize:vertical}
+label{display:block;font-size:13px;font-weight:bold;margin:12px 0 6px}
 .hidden{display:none!important}
-
-footer{
-  background:white;
-  border-top:1px solid var(--line);
-  padding:25px;
-  text-align:center;
-  color:var(--muted);
-  font-size:12px;
-}
-
-@media(max-width:760px){
-  header{padding:12px 16px}
-  nav{
-    width:100%;
-    justify-content:space-between;
-    gap:6px;
-  }
-  nav button{font-size:12px}
-  .hero{grid-template-columns:1fr;padding:30px 22px}
-  .cards{grid-template-columns:1fr 1fr}
-  .chat-layout{grid-template-columns:1fr}
-  .chat-list{display:flex;gap:8px;overflow:auto}
-  .chat-person{min-width:150px}
-}
-
-@media(max-width:520px){
-  .cards{grid-template-columns:1fr}
-  .form-grid{grid-template-columns:1fr}
-  .field.full{grid-column:auto}
-  main{padding:22px 15px 55px}
-  .chat-send{flex-direction:column}
-}
+.hero,.panel,.card,.chatbox{background:white;border:1px solid var(--line);border-radius:16px;padding:22px}
+.hero{padding:45px;background:linear-gradient(120deg,#eaf2ed,#f9faf7)}
+h1{font-size:clamp(28px,5vw,42px);margin:0 0 12px;color:var(--g)}
+h2{font-size:23px;margin:0 0 16px}
+h3{font-size:17px}
+p{line-height:1.65}
+.muted{color:var(--muted);font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.card{display:flex;flex-direction:column;gap:10px}
+.card p{font-size:14px}
+.pill{display:inline-block;background:var(--mint);color:var(--g);border-radius:20px;padding:5px 9px;font-size:12px}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.row>*{max-width:100%}
+.section{margin-top:28px}
+.list{display:flex;flex-direction:column;gap:10px}
+.item{background:white;border:1px solid var(--line);border-radius:12px;padding:15px}
+.item h3{margin:0 0 7px}
+.item p{margin:5px 0}
+.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.field.full{grid-column:1/-1}
+.empty{background:white;border:1px dashed #cbd8cf;border-radius:12px;padding:25px;text-align:center;color:var(--muted)}
+.chat-layout{display:grid;grid-template-columns:300px minmax(0,1fr);gap:15px;align-items:start}
+.chat-list{display:flex;flex-direction:column;gap:8px}
+.chat-choice{background:white;border:1px solid var(--line);border-radius:10px;padding:12px;text-align:left;width:100%;color:var(--ink)}
+.chat-choice.active{border-color:var(--g);background:var(--mint)}
+.chatbox{padding:0;overflow:hidden}
+.chat-head{padding:16px;border-bottom:1px solid var(--line)}
+#messages{height:390px;overflow-y:auto;padding:15px;display:flex;flex-direction:column;gap:10px}
+.bubble{max-width:85%;align-self:flex-start;background:#edf1ee;border-radius:13px;padding:10px 12px;overflow-wrap:anywhere}
+.bubble.mine{align-self:flex-end;background:var(--g);color:white}
+.bubble .who{font-size:11px;font-weight:bold;margin-bottom:5px}
+.bubble .when{font-size:10px;opacity:.7;margin-top:5px}
+.chat-send{display:flex;gap:8px;padding:12px;border-top:1px solid var(--line)}
+.chat-send input{flex:1;min-width:0}
+.modal-back{display:none;position:fixed;inset:0;background:#0009;z-index:20;align-items:center;justify-content:center;padding:15px}
+.modal-back.show{display:flex}
+.modal{background:white;padding:22px;border-radius:15px;width:min(520px,100%);max-height:85vh;overflow:auto}
+.checkrow{display:flex;align-items:center;gap:9px;padding:8px 0}
+.checkrow input{width:auto}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#203b2d;color:white;padding:12px 17px;border-radius:10px;z-index:30;max-width:90%;display:none}
+.toast.show{display:block}
+footer{text-align:center;padding:25px;color:var(--muted);font-size:12px;background:white}
+@media(max-width:760px){.grid{grid-template-columns:1fr 1fr}.chat-layout{grid-template-columns:1fr}.chat-list{max-height:210px;overflow:auto}.hero{padding:28px}.formgrid{grid-template-columns:1fr}.field.full{grid-column:auto}}
+@media(max-width:480px){.grid{grid-template-columns:1fr}header{position:static}nav{width:100%;justify-content:space-between}nav button{font-size:12px;padding:7px 2px}main{padding:20px 12px 50px}#messages{height:330px}}
 </style>
 </head>
-
 <body>
-
 <header>
   <div class="logo" onclick="go('home')">E:UM</div>
-
   <nav>
     <button id="nav-home" class="active" onclick="go('home')">홈</button>
-    <button id="nav-explore" onclick="go('explore')">프로젝트 찾기</button>
+    <button id="nav-explore" onclick="go('explore')">프로젝트</button>
     <button id="nav-create" onclick="go('create')">프로젝트 등록</button>
     <button id="nav-profile" onclick="go('profile')">내 프로필</button>
-    <button id="nav-chat" onclick="go('chat')">대화창</button>
+    <button id="nav-chat" onclick="go('chat')">대화</button>
   </nav>
-
-  <button class="btn small" onclick="go('profile')">내 프로필</button>
+  <button class="primary" id="loginBtn" onclick="go('profile')">내 프로필</button>
 </header>
 
 <main>
-
-<section id="homePage">
-  <div class="hero">
-    <div>
-      <div class="eyebrow">CONNECT GENERATIONS</div>
-      <h1>서로 다른 경험이<br><span>새로운 가능성</span>이 됩니다.</h1>
-      <p>세대와 분야의 경계를 넘어 서로의 경험과 역량을 나누고 함께 프로젝트를 만들어 보세요.</p>
-      <button class="btn" onclick="go('explore')">프로젝트 둘러보기</button>
-      <button class="btn light" onclick="go('create')">프로젝트 등록</button>
+  <section id="homePage">
+    <div class="hero">
+      <div class="pill">EXPERIENCE MEETS POSSIBILITY</div>
+      <h1>서로 다른 경험이<br>새로운 가능성이 됩니다.</h1>
+      <p>프로젝트를 만들고, 함께할 사람을 찾고, 1:1 또는 단체 대화로 협업을 시작해 보세요.</p>
+      <div class="row">
+        <button class="primary" onclick="go('explore')">프로젝트 둘러보기</button>
+        <button class="secondary" onclick="go('create')">프로젝트 등록하기</button>
+      </div>
     </div>
-    <div class="hero-art"><div class="orb">E</div></div>
-  </div>
+    <div class="section">
+      <h2>함께할 프로젝트</h2>
+      <div id="homeCards" class="grid"></div>
+    </div>
+  </section>
 
-  <div class="stats">
-    <div class="stat"><b id="statProjects">0</b><span>프로젝트</span></div>
-    <div class="stat"><b>1:1</b><span>개인 대화</span></div>
-    <div class="stat"><b>E:UM</b><span>세대 연결</span></div>
-  </div>
-
-  <div class="section-head">
-    <h2>함께할 프로젝트</h2>
-    <button class="btn outline small" onclick="go('explore')">전체 보기</button>
-  </div>
-
-  <div class="cards" id="homeCards"></div>
-</section>
-
-<section id="explorePage" class="hidden">
-  <div class="page-title">
+  <section id="explorePage" class="hidden">
     <h1>프로젝트 찾기</h1>
-    <p>관심 있는 프로젝트를 찾아보세요.</p>
-  </div>
+    <p class="muted">관심 있는 프로젝트를 찾아 대화를 요청해 보세요.</p>
+    <input id="searchInput" placeholder="프로젝트 제목이나 분야 검색" oninput="renderExplore()">
+    <div class="section grid" id="exploreCards"></div>
+  </section>
 
-  <div class="field">
-    <input id="searchInput" placeholder="프로젝트 검색..." oninput="renderExplore()">
-  </div>
-
-  <div class="filters">
-    <button class="chip active" data-filter="전체" onclick="setFilter('전체')">전체</button>
-    <button class="chip" data-filter="IT·기술" onclick="setFilter('IT·기술')">IT·기술</button>
-    <button class="chip" data-filter="디자인" onclick="setFilter('디자인')">디자인</button>
-    <button class="chip" data-filter="마케팅" onclick="setFilter('마케팅')">마케팅</button>
-    <button class="chip" data-filter="교육" onclick="setFilter('교육')">교육</button>
-  </div>
-
-  <div class="filters">
-    <button class="chip active" data-scope="전체" onclick="setScope('전체')">전체 매칭</button>
-    <button class="chip" data-scope="1:1 개인 매칭" onclick="setScope('1:1 개인 매칭')">1:1</button>
-    <button class="chip" data-scope="세대 간 매칭" onclick="setScope('세대 간 매칭')">세대 간</button>
-    <button class="chip" data-scope="그룹 매칭" onclick="setScope('그룹 매칭')">그룹</button>
-    <button class="chip" data-scope="분야별 매칭" onclick="setScope('분야별 매칭')">분야별</button>
-  </div>
-
-  <div class="cards" id="exploreCards"></div>
-</section>
-
-<section id="createPage" class="hidden">
-  <div class="page-title">
+  <section id="createPage" class="hidden">
     <h1>프로젝트 등록</h1>
-    <p>함께하고 싶은 프로젝트를 소개하세요.</p>
-  </div>
-
-  <form class="panel" id="projectForm">
-    <div class="form-grid">
-
-      <div class="field full">
-        <label>프로젝트 제목 *</label>
-        <input name="title" required maxlength="55">
+    <form class="panel" id="projectForm">
+      <div class="formgrid">
+        <div class="field full"><label>프로젝트 제목 *</label><input name="title" required maxlength="55"></div>
+        <div><label>대표 분야 *</label><select name="category" required><option value="">선택</option><option>IT·기술</option><option>디자인</option><option>마케팅</option><option>교육</option><option>경영·창업</option><option>문화·예술</option><option>기타</option></select></div>
+        <div><label>매칭 범위 *</label><select name="scope" required><option value="">선택</option><option>1:1 개인 매칭</option><option>세대 간 매칭</option><option>그룹 매칭</option><option>분야별 매칭</option></select></div>
+        <div><label>모집 인원</label><select name="members"><option>2명</option><option>3~4명</option><option>5명 이상</option></select></div>
+        <div><label>진행 방식</label><select name="method"><option>온라인 중심</option><option>오프라인 중심</option><option>온라인·오프라인 병행</option></select></div>
+        <div class="field full"><label>프로젝트 소개 *</label><textarea name="description" required maxlength="500"></textarea></div>
+        <div><label>제공할 수 있는 역량</label><input name="provide"></div>
+        <div><label>필요한 역량</label><input name="need"></div>
+        <div class="field full"><button class="primary" type="submit">프로젝트 게시하기</button></div>
       </div>
+    </form>
+  </section>
 
-      <div class="field">
-        <label>분야 *</label>
-        <select name="category" required>
-          <option value="">선택</option>
-          <option>IT·기술</option>
-          <option>디자인</option>
-          <option>마케팅</option>
-          <option>교육</option>
-          <option>경영·창업</option>
-          <option>문화·예술</option>
-          <option>기타</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label>매칭 방식 *</label>
-        <select name="scope" required>
-          <option value="">선택</option>
-          <option>1:1 개인 매칭</option>
-          <option>세대 간 매칭</option>
-          <option>그룹 매칭</option>
-          <option>분야별 매칭</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label>모집 인원</label>
-        <select name="members">
-          <option>2명</option>
-          <option>3~4명</option>
-          <option>5명 이상</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label>진행 방식</label>
-        <select name="method">
-          <option>온라인 중심</option>
-          <option>오프라인 중심</option>
-          <option>온라인·오프라인 병행</option>
-        </select>
-      </div>
-
-      <div class="field full">
-        <label>프로젝트 소개 *</label>
-        <textarea name="description" required maxlength="500"></textarea>
-      </div>
-
-      <div class="field">
-        <label>제공할 역량</label>
-        <input name="provide">
-      </div>
-
-      <div class="field">
-        <label>필요한 역량</label>
-        <input name="need">
-      </div>
-
-      <div class="field full">
-        <button class="btn" type="submit">프로젝트 등록하기</button>
-      </div>
-
-    </div>
-  </form>
-</section>
-
-<section id="profilePage" class="hidden">
-  <div class="page-title">
+  <section id="profilePage" class="hidden">
     <h1>내 프로필</h1>
-    <p>프로필을 저장하고 받은 요청을 확인하세요.</p>
-  </div>
+    <form class="panel" id="profileForm">
+      <div class="formgrid">
+        <div><label>닉네임 *</label><input name="nickname" required maxlength="20"></div>
+        <div><label>연령대</label><select name="age"><option>선택 안 함</option><option>청년층</option><option>장년층</option><option>기타</option></select></div>
+        <div><label>관심 분야</label><select name="interest"><option>IT·기술</option><option>디자인</option><option>마케팅</option><option>교육</option><option>경영·창업</option><option>문화·예술</option><option>기타</option></select></div>
+        <div><label>보유 역량</label><input name="skills"></div>
+        <div class="field full"><label>자기소개</label><textarea name="intro"></textarea></div>
+        <div class="field full"><button class="primary" type="submit">프로필 저장</button></div>
+      </div>
+    </form>
+    <div class="section">
+      <h2>받은 대화 요청</h2>
+      <div id="incomingRequests" class="list"></div>
+    </div>
+    <div class="section">
+      <h2>내가 보낸 대화 요청</h2>
+      <div id="myRequests" class="list"></div>
+    </div>
+  </section>
 
-  <form class="profile-box" id="profileForm">
-    <div class="profile-head">
-      <div class="avatar" id="avatarLetter">E</div>
-      <div>
-        <b id="profileName">프로필 미등록</b>
-        <div class="hint">나의 협업 프로필</div>
+  <section id="chatPage" class="hidden">
+    <div class="row" style="justify-content:space-between">
+      <div><h1>대화</h1><p class="muted">1:1 대화와 프로젝트 단체방</p></div>
+      <button class="primary" onclick="openCreateGroup()">단체방 만들기</button>
+    </div>
+    <div class="chat-layout section">
+      <div class="panel">
+        <h2>대화 목록</h2>
+        <div id="chatList" class="chat-list"></div>
+        <p id="chatListHint" class="muted"></p>
+      </div>
+      <div class="chatbox">
+        <div class="chat-head">
+          <b id="chatTitle">대화방을 선택해 주세요</b>
+          <div id="realtimeStatus" class="muted">실시간 연결 대기</div>
+          <div id="memberSummary" class="muted"></div>
+          <div class="row" style="margin-top:8px">
+            <button id="membersBtn" class="secondary hidden" onclick="showMembers()">참여자 보기</button>
+            <button id="leaveGroupBtn" class="secondary hidden" onclick="leaveGroup()">단체방 나가기</button>
+          </div>
+        </div>
+        <div id="messages"><div class="empty">대화방을 선택하면 메시지가 표시됩니다.</div></div>
+        <form id="messageForm" class="chat-send">
+          <input id="messageInput" maxlength="3000" placeholder="메시지를 입력하세요" autocomplete="off" disabled>
+          <button class="primary" id="sendBtn" disabled>전송</button>
+        </form>
       </div>
     </div>
-
-    <div class="form-grid">
-      <div class="field">
-        <label>닉네임 *</label>
-        <input name="nickname" required maxlength="20">
-      </div>
-
-      <div class="field">
-        <label>연령대</label>
-        <select name="age">
-          <option>선택 안 함</option>
-          <option>청년층</option>
-          <option>장년층</option>
-          <option>기타</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label>관심 분야</label>
-        <select name="interest">
-          <option>IT·기술</option>
-          <option>디자인</option>
-          <option>마케팅</option>
-          <option>교육</option>
-          <option>경영·창업</option>
-          <option>문화·예술</option>
-          <option>기타</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label>보유 역량</label>
-        <input name="skills">
-      </div>
-
-      <div class="field full">
-        <label>자기소개</label>
-        <textarea name="intro"></textarea>
-      </div>
-
-      <div class="field full">
-        <button class="btn" type="submit">프로필 저장</button>
-      </div>
-    </div>
-  </form>
-
-  <div class="section-head">
-    <h2>받은 대화 요청</h2>
-    <button class="btn outline small" onclick="refreshAll()">새로고침</button>
-  </div>
-  <div id="receivedRequests" class="empty">불러오는 중...</div>
-
-  <div class="section-head">
-    <h2>내가 보낸 요청</h2>
-  </div>
-  <div id="myRequests" class="empty">불러오는 중...</div>
-</section>
-
-<section id="chatPage" class="hidden">
-  <div class="page-title">
-    <h1>대화창</h1>
-    <p>수락된 상대와 실시간으로 대화할 수 있습니다.</p>
-  </div>
-
-  <div class="chat-layout">
-    <div class="chat-list" id="chatList">
-      <div class="empty">대화 목록이 없습니다.</div>
-    </div>
-
-    <div class="chat-window">
-      <div class="chat-head" id="chatTitle">대화할 상대를 선택하세요.</div>
-
-      <div class="messages" id="messages">
-        <div class="empty">왼쪽에서 대화를 선택하세요.</div>
-      </div>
-
-      <form class="chat-send" id="messageForm">
-        <textarea id="messageInput" maxlength="2000" placeholder="메시지를 입력하세요..." required></textarea>
-        <button class="btn" type="submit">보내기</button>
-      </form>
-    </div>
-  </div>
-
-  <p class="hint" id="realtimeStatus">실시간 연결 상태: 대기 중</p>
-
-  <button class="btn outline small" onclick="loadChats()">대화 목록 새로고침</button>
-</section>
-
+  </section>
 </main>
 
-<footer>
-  E:UM · 세대와 경험을 연결하는 협업 플랫폼
-</footer>
-
+<footer>E:UM · 세대와 경험을 연결하는 협업 플랫폼<br><br>실명, 연락처, 주소 등 실제 개인정보를 입력하지 마세요.</footer>
 <div class="modal-back" id="modalBack" onclick="if(event.target===this)closeModal()">
   <div class="modal" id="modalContent"></div>
 </div>
-
 <div class="toast" id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="config.js"></script>
-
 <script>
+"use strict";
+
 const $ = id => document.getElementById(id);
+const seed = [
+ {id:1,title:"지역 소상공인 홍보 콘텐츠 만들기",category:"마케팅",scope:"세대 간 매칭",members:"3~4명",method:"온라인·오프라인 병행",description:"지역의 작은 가게를 알릴 카드뉴스와 짧은 영상을 함께 제작합니다.",provide:"SNS 운영, 콘텐츠 기획",need:"디자인, 영상 편집",author:"이음기획자"},
+ {id:2,title:"초보 개발자를 위한 아이디어 멘토링",category:"IT·기술",scope:"1:1 개인 매칭",members:"2명",method:"온라인 중심",description:"웹사이트 제작을 시작한 사람들과 학습 방향을 나눕니다.",provide:"아이디어",need:"개발 경험",author:"코드새싹"},
+ {id:3,title:"세대가 함께 만드는 동네 기록집",category:"디자인",scope:"그룹 매칭",members:"5명 이상",method:"온라인·오프라인 병행",description:"동네의 오래된 장소와 이야기를 사진과 글로 기록합니다.",provide:"인터뷰, 글쓰기",need:"사진, 편집",author:"동네기록단"}
+];
 
-const config = window.EUM_CONFIG || {};
+let sb=null,user=null,profile=null,projects=[],requests=[];
+let activeChat=null,chatChannel=null,chatLoadToken=0;
+let groupMemberCache=[];
 
-const SUPABASE_URL = config.SUPABASE_URL;
-const SUPABASE_KEY = config.SUPABASE_ANON_KEY;
-
-let sb = null;
-let user = null;
-let profile = null;
-let projects = [];
-let requests = [];
-
-let activeCategory = "전체";
-let activeScope = "전체";
-let activeChat = null;
-
-let chatChannel = null;
-let messageLoadToken = 0;
+const configured = !!(
+ window.EUM_CONFIG &&
+ window.EUM_CONFIG.SUPABASE_URL &&
+ window.EUM_CONFIG.SUPABASE_ANON_KEY
+);
 
 function esc(value=""){
-  return String(value).replace(/[&<>"']/g,c=>({
-    "&":"&amp;",
-    "<":"&lt;",
-    ">":"&gt;",
-    '"':"&quot;",
-    "'":"&#39;"
-  }[c]));
+ return String(value).replace(/[&<>"']/g,c=>({
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ }[c]));
 }
-
 function toast(message){
-  $("toast").textContent = message;
-  $("toast").classList.add("show");
-
-  setTimeout(()=>{
-    $("toast").classList.remove("show");
-  },3000);
+ $("toast").textContent=message;
+ $("toast").classList.add("show");
+ setTimeout(()=>$("toast").classList.remove("show"),3000);
 }
-
 function showModal(html){
-  $("modalContent").innerHTML = html;
-  $("modalBack").classList.add("show");
+ $("modalContent").innerHTML=html;
+ $("modalBack").classList.add("show");
 }
-
 function closeModal(){
-  $("modalBack").classList.remove("show");
+ $("modalBack").classList.remove("show");
 }
-
 function go(page){
-  ["home","explore","create","profile","chat"].forEach(p=>{
-    $(p+"Page").classList.toggle("hidden",p!==page);
-    $("nav-"+p).classList.toggle("active",p===page);
-  });
-
-  if(page==="profile"){
-    renderProfile();
-  }
-
-  if(page==="chat"){
-    loadChats();
-  }
-
-  window.scrollTo({top:0,behavior:"smooth"});
+ ["home","explore","create","profile","chat"].forEach(p=>{
+  $(p+"Page").classList.toggle("hidden",p!==page);
+  $("nav-"+p).classList.toggle("active",p===page);
+ });
+ if(page==="home")renderHome();
+ if(page==="explore")renderExplore();
+ if(page==="profile")renderProfile();
+ if(page==="chat")loadChats();
+ window.scrollTo({top:0,behavior:"smooth"});
 }
-
-/* 프로젝트 카드 */
-
 function card(p){
-  return `
-  <article class="project-card">
-    <div><span class="pill">${esc(p.scope)}</span></div>
-    <h3>${esc(p.title)}</h3>
-    <p>${esc(p.description)}</p>
-    <div class="meta">
-      분야: ${esc(p.category)}<br>
-      모집: ${esc(p.members||"미정")}<br>
-      작성자: ${esc(p.author||"익명")}
-    </div>
-    <div class="card-actions">
-      <button class="btn outline small" onclick="detail(${Number(p.id)})">자세히</button>
-      <button class="btn small" onclick="requestProject(${Number(p.id)})">대화 요청</button>
-    </div>
-  </article>`;
+ return `<article class="card">
+  <span class="pill">${esc(p.scope||"프로젝트")}</span>
+  <h3>${esc(p.title)}</h3>
+  <p>${esc(p.description||"")}</p>
+  <div class="muted">${esc(p.category||"기타")} · ${esc(p.members||"")}<br>작성자 ${esc(p.author||"익명")}</div>
+  <div class="row">
+   <button class="secondary" onclick="detail(${Number(p.id)})">자세히</button>
+   <button class="primary" onclick="requestProject(${Number(p.id)})">대화 요청</button>
+  </div>
+ </article>`;
 }
-
 function renderHome(){
-  $("homeCards").innerHTML = projects.slice(0,3).map(card).join("") ||
-    `<div class="empty">등록된 프로젝트가 없습니다.</div>`;
-
-  $("statProjects").textContent = projects.length;
+ $("homeCards").innerHTML=projects.length
+  ?projects.slice(0,3).map(card).join("")
+  :`<div class="empty">아직 등록된 프로젝트가 없습니다.</div>`;
 }
-
 function renderExplore(){
-  const q = ($("searchInput")?.value||"").toLowerCase();
-
-  const list = projects.filter(p=>
-    (activeCategory==="전체" || p.category===activeCategory) &&
-    (activeScope==="전체" || p.scope===activeScope) &&
-    (`${p.title} ${p.description} ${p.category} ${p.need||""} ${p.provide||""}`).toLowerCase().includes(q)
-  );
-
-  $("exploreCards").innerHTML = list.map(card).join("") ||
-    `<div class="empty">검색 결과가 없습니다.</div>`;
+ const q=($("searchInput").value||"").toLowerCase();
+ const list=projects.filter(p=>
+  `${p.title||""} ${p.description||""} ${p.category||""} ${p.need||""} ${p.provide||""}`
+   .toLowerCase().includes(q)
+ );
+ $("exploreCards").innerHTML=list.length
+  ?list.map(card).join("")
+  :`<div class="empty">검색 결과가 없습니다.</div>`;
 }
-
-function setFilter(value){
-  activeCategory=value;
-
-  document.querySelectorAll("[data-filter]").forEach(b=>{
-    b.classList.toggle("active",b.dataset.filter===value);
-  });
-
-  renderExplore();
-}
-
-function setScope(value){
-  activeScope=value;
-
-  document.querySelectorAll("[data-scope]").forEach(b=>{
-    b.classList.toggle("active",b.dataset.scope===value);
-  });
-
-  renderExplore();
-}
-
 function detail(id){
-  const p = projects.find(x=>Number(x.id)===Number(id));
-  if(!p)return;
-
-  showModal(`
-    <span class="pill">${esc(p.scope)}</span>
-    <h2>${esc(p.title)}</h2>
-    <p>${esc(p.description)}</p>
-    <p>
-      분야: ${esc(p.category)}<br>
-      제공 역량: ${esc(p.provide||"미입력")}<br>
-      필요 역량: ${esc(p.need||"미입력")}<br>
-      작성자: ${esc(p.author||"익명")}
-    </p>
-    <button class="btn" onclick="requestProject(${Number(p.id)})">대화 요청</button>
-    <button class="btn outline" onclick="closeModal()">닫기</button>
-  `);
+ const p=projects.find(x=>Number(x.id)===Number(id));
+ if(!p)return;
+ showModal(`<h2>${esc(p.title)}</h2>
+ <p>${esc(p.description||"")}</p>
+ <p class="muted">분야: ${esc(p.category||"")}<br>
+ 모집 인원: ${esc(p.members||"")}<br>
+ 진행 방식: ${esc(p.method||"")}<br>
+ 제공 역량: ${esc(p.provide||"미입력")}<br>
+ 필요한 역량: ${esc(p.need||"미입력")}<br>
+ 작성자: ${esc(p.author||"익명")}</p>
+ <button class="primary" onclick="requestProject(${Number(p.id)})">대화 요청하기</button>
+ <button class="secondary" onclick="closeModal()">닫기</button>`);
 }
-
-/* 대화 요청 */
-
 async function requestProject(id){
-  const p = projects.find(x=>Number(x.id)===Number(id));
-  if(!p)return;
-
-  if(!user || !profile){
-    toast("먼저 프로필을 저장해 주세요.");
-    go("profile");
-    return;
-  }
-
-  if(p.owner_id===user.id){
-    toast("내 프로젝트에는 요청할 수 없습니다.");
-    return;
-  }
-
-  showModal(`
-    <h2>대화 요청하기</h2>
-    <p>${esc(p.title)}</p>
-
-    <div class="field">
-      <label>닉네임</label>
-      <input id="requestName" value="${esc(profile.nickname)}">
-    </div>
-
-    <div class="field">
-      <label>요청 메시지</label>
-      <textarea id="requestMessage" maxlength="1000"></textarea>
-    </div>
-
-    <button class="btn" onclick="sendRequest(${Number(p.id)})">요청 보내기</button>
-    <button class="btn outline" onclick="closeModal()">취소</button>
-  `);
+ if(!sb){toast("Supabase 설정을 확인해 주세요.");return}
+ if(!profile){toast("먼저 프로필을 저장해 주세요.");go("profile");return}
+ const p=projects.find(x=>Number(x.id)===Number(id));
+ if(!p)return;
+ if(p.owner_id===user.id){toast("본인 프로젝트에는 요청할 수 없습니다.");return}
+ showModal(`<h2>대화 요청</h2><p>${esc(p.title)}</p>
+ <label>요청 메시지</label><textarea id="requestMessage" maxlength="1000" placeholder="함께하고 싶은 이유를 적어 주세요."></textarea>
+ <div class="row" style="margin-top:12px">
+ <button class="primary" onclick="sendRequest(${Number(p.id)})">요청 보내기</button>
+ <button class="secondary" onclick="closeModal()">취소</button></div>`);
 }
-
 async function sendRequest(projectId){
-  const message = $("requestMessage").value.trim();
-  const name = $("requestName").value.trim() || profile.nickname;
-
-  if(!message){
-    toast("요청 메시지를 입력해 주세요.");
-    return;
-  }
-
-  const {data:old,error:checkError} = await sb
-    .from("match_requests")
-    .select("id")
-    .eq("project_id",projectId)
-    .eq("sender_id",user.id)
-    .maybeSingle();
-
-  if(checkError){
-    toast("확인 실패: "+checkError.message);
-    return;
-  }
-
-  if(old){
-    toast("이미 요청을 보냈습니다.");
-    return;
-  }
-
-  const {error} = await sb
-    .from("match_requests")
-    .insert({
-      project_id:projectId,
-      sender_id:user.id,
-      sender_name:name,
-      message:message
-    });
-
-  if(error){
-    toast("요청 실패: "+error.message);
-    return;
-  }
-
-  closeModal();
-  toast("대화 요청을 보냈습니다.");
-
-  await refreshAll();
+ const message=$("requestMessage").value.trim();
+ if(!message){toast("요청 메시지를 작성해 주세요.");return}
+ const {error}=await sb.from("match_requests").insert({
+  project_id:projectId,
+  sender_id:user.id,
+  sender_name:profile?.nickname||"사용자",
+  message
+ });
+ if(error){
+  toast("요청 실패: "+error.message);
+  return;
+ }
+ closeModal();
+ toast("대화 요청을 보냈습니다.");
+ await loadRequests();
+ await renderProfile();
 }
-
-/* 요청 수락 및 거절 */
-
-async function changeRequest(id,status){
-  const {error} = await sb
-    .from("match_requests")
-    .update({status})
-    .eq("id",id);
-
-  if(error){
-    toast("상태 변경 실패: "+error.message);
-    return;
-  }
-
-  toast(status==="수락됨"?"요청을 수락했습니다.":"요청을 거절했습니다.");
-
-  await refreshAll();
-}
-
-function renderProfile(){
-  if(!user)return;
-
-  if(profile){
-    $("profileName").textContent=profile.nickname;
-    $("avatarLetter").textContent=(profile.nickname||"E").slice(0,1);
-
-    const f=$("profileForm");
-
-    ["nickname","age","interest","skills","intro"].forEach(k=>{
-      if(f.elements[k] && profile[k]!=null){
-        f.elements[k].value=profile[k];
-      }
-    });
-  }
-
-  const mine=requests.filter(r=>r.sender_id===user.id);
-
-  $("myRequests").innerHTML=mine.map(r=>{
-    const p=projects.find(x=>Number(x.id)===Number(r.project_id));
-
-    return `
-      <div class="request-card">
-        <b>${esc(p?.title||"프로젝트")}</b>
-        <p>${esc(r.message)}</p>
-        <span class="pill">${esc(r.status||"요청 대기")}</span>
-
-        ${r.status==="수락됨"?
-          `<button class="btn small" onclick="openChat(${Number(r.id)})">대화 열기</button>`
-          :""}
-      </div>
-    `;
-  }).join("") || `<div class="empty">보낸 요청이 없습니다.</div>`;
-
-  const incoming=requests.filter(r=>{
-    const p=projects.find(x=>Number(x.id)===Number(r.project_id));
-    return p && p.owner_id===user.id && r.sender_id!==user.id;
-  });
-
-  $("receivedRequests").innerHTML=incoming.map(r=>{
-    const p=projects.find(x=>Number(x.id)===Number(r.project_id));
-
-    return `
-      <div class="request-card">
-        <span class="pill">받은 요청</span>
-        <h3>${esc(p?.title||"내 프로젝트")}</h3>
-        <p>보낸 사람: ${esc(r.sender_name)}</p>
-        <p>${esc(r.message)}</p>
-        <span class="pill">${esc(r.status||"요청 대기")}</span>
-
-        ${!r.status || r.status==="요청 대기" ? `
-          <div style="margin-top:12px">
-            <button class="btn small" onclick="changeRequest(${Number(r.id)},'수락됨')">수락</button>
-            <button class="btn danger small" onclick="changeRequest(${Number(r.id)},'거절됨')">거절</button>
-          </div>
-        `:""}
-
-        ${r.status==="수락됨"?
-          `<button class="btn small" onclick="openChat(${Number(r.id)})">대화 열기</button>`
-          :""}
-      </div>
-    `;
-  }).join("") || `
-    <div class="empty">
-      <b>아직 받은 요청이 없습니다.</b>
-      내 프로젝트에 도착한 요청이 여기에 표시됩니다.
-    </div>
-  `;
-}
-
-/* 데이터 불러오기 */
 
 async function loadProjects(){
-  const {data,error} = await sb
-    .from("projects")
-    .select("*")
-    .order("created_at",{ascending:false});
-
-  if(error)throw error;
-
-  projects=data||[];
-
-  renderHome();
-  renderExplore();
+ const {data,error}=await sb.from("projects").select("*").order("created_at",{ascending:false});
+ if(error){console.error(error);toast("프로젝트 조회 실패: "+error.message);return}
+ projects=data||[];
+ renderHome();
+ renderExplore();
 }
-
 async function loadProfile(){
-  const {data,error} = await sb
-    .from("profiles")
-    .select("*")
-    .eq("id",user.id)
-    .maybeSingle();
-
-  if(error)throw error;
-
-  profile=data;
-}
-
-async function loadRequests(){
-  const {data,error} = await sb
-    .from("match_requests")
-    .select("*")
-    .order("created_at",{ascending:false});
-
-  if(error)throw error;
-
-  requests=data||[];
-}
-
-async function refreshAll(){
-  try{
-    await loadProjects();
-    await loadRequests();
-    renderProfile();
-
-    if(activeChat){
-      await loadChats();
-    }
-  }catch(e){
-    console.error(e);
-    toast("새로고침 실패: "+e.message);
-  }
-}
-
-/* 채팅 목록 */
-
-function getOtherName(r,p){
-  if(r.sender_id===user.id){
-    return p.author||"프로젝트 작성자";
-  }
-
-  return r.sender_name||"상대방";
-}
-
-async function loadChats(){
-  if(!sb || !user)return;
-
-  const accepted=requests.filter(r=>{
-    const p=projects.find(x=>Number(x.id)===Number(r.project_id));
-
-    return r.status==="수락됨" &&
-      (
-        r.sender_id===user.id ||
-        p?.owner_id===user.id
-      );
+ const {data,error}=await sb.from("profiles").select("*").eq("id",user.id).maybeSingle();
+ if(error){console.error(error);return}
+ profile=data;
+ if(profile){
+  const f=$("profileForm");
+  ["nickname","age","interest","skills","intro"].forEach(k=>{
+   if(f.elements[k]&&profile[k]!=null)f.elements[k].value=profile[k];
   });
-
-  if(!accepted.length){
-    $("chatList").innerHTML=`<div class="empty">수락된 대화가 없습니다.</div>`;
-    $("chatTitle").textContent="대화할 상대를 선택하세요.";
-    $("messages").innerHTML=`<div class="empty">수락된 요청이 여기에 표시됩니다.</div>`;
-    return;
-  }
-
-  $("chatList").innerHTML=accepted.map(r=>{
-    const p=projects.find(x=>Number(x.id)===Number(r.project_id));
-
-    return `
-      <button class="chat-person ${activeChat===Number(r.id)?"active":""}"
-        onclick="openChat(${Number(r.id)})">
-        <b>${esc(getOtherName(r,p))}</b><br>
-        <span class="hint">${esc(p?.title||"프로젝트")}</span>
-      </button>
-    `;
-  }).join("");
-
-  if(activeChat && accepted.some(r=>Number(r.id)===Number(activeChat))){
-    await fetchMessages(activeChat);
-  }
+  $("loginBtn").textContent=profile.nickname||"내 프로필";
+ }
 }
-
-/* 실시간 채팅 */
-
-async function startRealtime(requestId){
-
-  // 이전 채널 정리
-  if(chatChannel){
-    await sb.removeChannel(chatChannel);
-    chatChannel=null;
-  }
-
-  $("realtimeStatus").textContent="실시간 연결 중...";
-
-  chatChannel=sb
-    .channel("eum-chat-"+requestId+"-"+user.id)
-
-    .on(
-      "postgres_changes",
-      {
-        event:"INSERT",
-        schema:"public",
-        table:"messages",
-        filter:"request_id=eq."+requestId
-      },
-      async(payload)=>{
-
-        // 현재 대화가 바뀌었으면 무시
-        if(Number(activeChat)!==Number(requestId)){
-          return;
-        }
-
-        console.log("새 메시지 수신:",payload.new);
-
-        // 새 메시지를 즉시 불러오기
-        await fetchMessages(requestId);
-      }
-    )
-
-    .subscribe((status,error)=>{
-
-      console.log("Realtime 상태:",status,error||"");
-
-      if(status==="SUBSCRIBED"){
-        $("realtimeStatus").textContent="실시간 연결됨";
-      }
-
-      if(status==="CHANNEL_ERROR"){
-        $("realtimeStatus").textContent="실시간 연결 오류";
-        toast("실시간 연결 오류. Supabase 설정을 확인하세요.");
-      }
-
-      if(status==="TIMED_OUT"){
-        $("realtimeStatus").textContent="실시간 연결 시간 초과";
-      }
-
-      if(status==="CLOSED"){
-        $("realtimeStatus").textContent="실시간 연결 종료";
-      }
-    });
+async function loadRequests(){
+ const {data,error}=await sb.from("match_requests").select("*").order("created_at",{ascending:false});
+ if(error){console.error("요청 조회 실패",error);return}
+ requests=data||[];
 }
-
-/* 대화 열기 */
-
-async function openChat(requestId){
-  activeChat=Number(requestId);
-
-  go("chat");
-
-  await loadChats();
-
-  await startRealtime(activeChat);
-
-  await fetchMessages(activeChat);
-}
-
-/* 메시지 가져오기 */
-
-async function fetchMessages(requestId){
-
-  const token=++messageLoadToken;
-
-  const r=requests.find(x=>Number(x.id)===Number(requestId));
-
-  if(!r)return;
-
+async function renderProfile(){
+ if(!user||!sb)return;
+ await loadRequests();
+ const incoming=requests.filter(r=>{
   const p=projects.find(x=>Number(x.id)===Number(r.project_id));
+  return p?.owner_id===user.id;
+ });
+ const sent=requests.filter(r=>r.sender_id===user.id);
 
-  if(!p)return;
+ $("incomingRequests").innerHTML=incoming.length?incoming.map(r=>{
+  const p=projects.find(x=>Number(x.id)===Number(r.project_id));
+  const status=r.status||"대기중";
+  const actions=status==="수락됨"||status==="거절됨"
+   ?`<span class="pill">${esc(status)}</span>`
+   :`<button class="primary" onclick="updateRequest(${Number(r.id)},'수락됨')">수락</button>
+      <button class="danger" onclick="updateRequest(${Number(r.id)},'거절됨')">거절</button>`;
+  return `<div class="item"><h3>${esc(p?.title||"프로젝트")}</h3>
+   <p><b>${esc(r.sender_name||"사용자")}</b>: ${esc(r.message||"")}</p>
+   <div class="row">${actions}</div></div>`;
+ }).join(""):`<div class="empty">받은 요청이 없습니다.</div>`;
 
-  $("chatTitle").textContent=
-    getOtherName(r,p)+" · "+p.title;
-
-  const {data,error}=await sb
-    .from("messages")
-    .select("*")
-    .eq("request_id",requestId)
-    .order("created_at",{ascending:true});
-
-  // 다른 대화의 요청이 늦게 도착한 경우 방지
-  if(token!==messageLoadToken)return;
-
-  if(error){
-    $("messages").innerHTML=`
-      <div class="empty">
-        메시지 조회 실패<br>
-        ${esc(error.message)}
-      </div>
-    `;
-    return;
-  }
-
-  const box=$("messages");
-
-  box.innerHTML=(data||[]).map(m=>`
-    <div class="bubble ${m.sender_id===user.id?"mine":""}">
-      ${esc(m.message)}
-      <small>${new Date(m.created_at).toLocaleString("ko-KR")}</small>
-    </div>
-  `).join("") || `
-    <div class="empty">첫 메시지를 보내 대화를 시작해 보세요.</div>
-  `;
-
-  box.scrollTop=box.scrollHeight;
+ $("myRequests").innerHTML=sent.length?sent.map(r=>{
+  const p=projects.find(x=>Number(x.id)===Number(r.project_id));
+  return `<div class="item"><h3>${esc(p?.title||"프로젝트")}</h3>
+   <p>${esc(r.message||"")}</p>
+   <span class="pill">${esc(r.status||"대기중")}</span>
+   ${r.status==="수락됨"?` <button class="secondary" onclick="openChat(${Number(r.id)},'one')">대화하기</button>`:""}
+   </div>`;
+ }).join(""):`<div class="empty">보낸 요청이 없습니다.</div>`;
 }
-
-/* 메시지 보내기 */
-
-$("messageForm").addEventListener("submit",async e=>{
-  e.preventDefault();
-
-  if(!activeChat){
-    toast("먼저 대화를 선택하세요.");
-    return;
-  }
-
-  const message=$("messageInput").value.trim();
-
-  if(!message)return;
-
-  const r=requests.find(x=>Number(x.id)===Number(activeChat));
-
-  const p=projects.find(x=>Number(x.id)===Number(r?.project_id));
-
-  if(!r || !p || r.status!=="수락됨"){
-    toast("수락된 대화만 사용할 수 있습니다.");
-    return;
-  }
-
-  const receiver_id=r.sender_id===user.id
-    ?p.owner_id
-    :r.sender_id;
-
-  const sendButton=e.submitter;
-
-  if(sendButton)sendButton.disabled=true;
-
-  const {error}=await sb
-    .from("messages")
-    .insert({
-      request_id:r.id,
-      sender_id:user.id,
-      receiver_id:receiver_id,
-      message:message
-    });
-
-  if(sendButton)sendButton.disabled=false;
-
-  if(error){
-    toast("전송 실패: "+error.message);
-    return;
-  }
-
-  $("messageInput").value="";
-
-  // 내가 보낸 메시지도 바로 표시
-  await fetchMessages(activeChat);
-});
-
-/* 프로젝트 등록 */
+async function updateRequest(id,status){
+ const {error}=await sb.from("match_requests").update({status}).eq("id",id);
+ if(error){toast("요청 상태 변경 실패: "+error.message);return}
+ toast(status==="수락됨"?"요청을 수락했습니다.":"요청을 거절했습니다.");
+ await loadRequests();
+ await renderProfile();
+ await loadChats();
+}
 
 $("projectForm").addEventListener("submit",async e=>{
-  e.preventDefault();
-
-  if(!profile){
-    toast("먼저 프로필을 저장해 주세요.");
-    go("profile");
-    return;
-  }
-
-  const d=Object.fromEntries(new FormData(e.target).entries());
-
-  const {error}=await sb
-    .from("projects")
-    .insert({
-      ...d,
-      owner_id:user.id,
-      author:profile.nickname
-    });
-
-  if(error){
-    toast("등록 실패: "+error.message);
-    return;
-  }
-
-  e.target.reset();
-
-  await loadProjects();
-
-  toast("프로젝트를 등록했습니다.");
-  go("explore");
+ e.preventDefault();
+ if(!sb){toast("Supabase 설정을 확인해 주세요.");return}
+ if(!profile){toast("먼저 프로필을 저장해 주세요.");go("profile");return}
+ const d=Object.fromEntries(new FormData(e.target).entries());
+ const {error}=await sb.from("projects").insert({...d,owner_id:user.id,author:profile.nickname});
+ if(error){toast("프로젝트 등록 실패: "+error.message);return}
+ e.target.reset();
+ await loadProjects();
+ toast("프로젝트를 등록했습니다.");
+ go("explore");
 });
-
-/* 프로필 저장 */
-
 $("profileForm").addEventListener("submit",async e=>{
-  e.preventDefault();
-
-  const d=Object.fromEntries(new FormData(e.target).entries());
-
-  const {error}=await sb
-    .from("profiles")
-    .upsert({
-      id:user.id,
-      ...d
-    });
-
-  if(error){
-    toast("프로필 저장 실패: "+error.message);
-    return;
-  }
-
-  profile={id:user.id,...d};
-
-  toast("프로필을 저장했습니다.");
-
-  renderProfile();
+ e.preventDefault();
+ if(!sb||!user)return;
+ const d=Object.fromEntries(new FormData(e.target).entries());
+ const {error}=await sb.from("profiles").upsert({id:user.id,...d});
+ if(error){toast("프로필 저장 실패: "+error.message);return}
+ profile={id:user.id,...d};
+ $("loginBtn").textContent=profile.nickname||"내 프로필";
+ toast("프로필을 저장했습니다.");
+ await renderProfile();
 });
 
-/* 시작 */
+// ------------------------------------------
+// 1:1 채팅 + 단체 채팅 목록
+// ------------------------------------------
+async function loadChats(){
+ if(!sb||!user)return;
+ const list=$("chatList");
+ list.innerHTML=`<div class="muted">대화 목록을 불러오는 중...</div>`;
+ await loadProjects();
+ await loadRequests();
 
-async function init(){
-
-  if(!SUPABASE_URL || !SUPABASE_KEY){
-    toast("config.js 설정을 확인해 주세요.");
-    console.error("EUM_CONFIG 설정을 찾을 수 없습니다.");
-    return;
+ const entries=[];
+ for(const r of requests){
+  if(r.status!=="수락됨")continue;
+  const p=projects.find(x=>Number(x.id)===Number(r.project_id));
+  if(!p)continue;
+  if(r.sender_id===user.id||p.owner_id===user.id){
+   const otherId=r.sender_id===user.id?p.owner_id:r.sender_id;
+   const otherName=r.sender_id===user.id?(p.author||"프로젝트 작성자"):(r.sender_name||"요청자");
+   entries.push({type:"one",id:Number(r.id),title:otherName,subtitle:p.title});
   }
+ }
 
-  try{
+ const {data:members,error:memberError}=await sb.from("group_chat_members")
+  .select("group_chat_id").eq("user_id",user.id);
+ if(memberError)console.error("단체방 목록 조회 실패",memberError);
 
-    sb=window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_KEY
-    );
-
-    const {data,error}=await sb.auth.getSession();
-
-    if(error)throw error;
-
-    user=data.session?.user||null;
-
-    if(!user){
-      const result=await sb.auth.signInAnonymously();
-
-      if(result.error)throw result.error;
-
-      user=result.data.user;
-    }
-
-    await loadProjects();
-    await loadProfile();
-    await loadRequests();
-
-    renderProfile();
-
-    console.log("E:UM 연결 완료");
-    console.log("사용자 ID:",user.id);
-
-  }catch(e){
-    console.error(e);
-    toast("연결 실패: "+e.message);
+ if(members?.length){
+  const ids=[...new Set(members.map(m=>Number(m.group_chat_id)))];
+  const {data:groups,error:groupError}=await sb.from("group_chats")
+   .select("*").in("id",ids).order("created_at",{ascending:false});
+  if(groupError)console.error(groupError);
+  for(const g of groups||[]){
+   entries.push({type:"group",id:Number(g.id),title:g.name,subtitle:"단체방"});
   }
+ }
+
+ entries.sort((a,b)=>a.title.localeCompare(b.title,"ko"));
+ list.innerHTML=entries.length?entries.map(c=>{
+  const active=activeChat&&activeChat.type===c.type&&Number(activeChat.id)===c.id;
+  return `<button class="chat-choice ${active?"active":""}" onclick="openChat(${c.id},'${c.type}')">
+   <b>${c.type==="group"?"👥 ":"💬 "}${esc(c.title)}</b>
+   <div class="muted">${esc(c.subtitle||"")}</div>
+  </button>`;
+ }).join(""):`<div class="empty">아직 대화가 없습니다.<br>프로젝트 대화 요청을 수락받거나 단체방을 만들어 보세요.</div>`;
+ $("chatListHint").textContent="수락된 1:1 요청과 참여 중인 단체방이 표시됩니다.";
 }
 
+async function stopRealtime(){
+ if(chatChannel&&sb){
+  try{await sb.removeChannel(chatChannel)}catch(e){console.warn(e)}
+ }
+ chatChannel=null;
+}
+
+async function openChat(id,type){
+ if(!sb||!user)return;
+ await stopRealtime();
+ chatLoadToken++;
+ activeChat={id:Number(id),type};
+ $("chatTitle").textContent="불러오는 중...";
+ $("messages").innerHTML=`<div class="empty">메시지를 불러오는 중...</div>`;
+ $("messageInput").disabled=false;
+ $("sendBtn").disabled=false;
+ $("membersBtn").classList.toggle("hidden",type!=="group");
+ $("leaveGroupBtn").classList.toggle("hidden",type!=="group");
+ $("memberSummary").textContent="";
+ await loadChats();
+ if(!activeChat||activeChat.id!==Number(id)||activeChat.type!==type)return;
+
+ if(type==="one"){
+  const r=requests.find(x=>Number(x.id)===Number(id));
+  const p=r&&projects.find(x=>Number(x.id)===Number(r.project_id));
+  $("chatTitle").textContent=p?.title||"1:1 대화";
+  await fetchMessages(id);
+  startRealtime(id,"one");
+ }else{
+  const {data:g}=await sb.from("group_chats").select("*").eq("id",id).maybeSingle();
+  $("chatTitle").textContent=g?.name||"단체 대화";
+  await fetchMessages(id);
+  await updateMemberSummary(id);
+  startRealtime(id,"group");
+ }
+}
+
+function startRealtime(id,type){
+ if(!sb||!user)return;
+ const table=type==="one"?"messages":"group_messages";
+ const field=type==="one"?"request_id":"group_chat_id";
+ $("realtimeStatus").textContent="실시간 연결 중...";
+ chatChannel=sb.channel("eum-"+type+"-"+id+"-"+user.id)
+  .on("postgres_changes",{
+   event:"INSERT",schema:"public",table,
+   filter:field+"=eq."+id
+  },payload=>{
+   if(!activeChat||activeChat.type!==type||Number(activeChat.id)!==Number(id))return;
+   appendMessage(payload.new);
+  })
+  .subscribe(status=>{
+   console.log("Realtime status:",status);
+   if(status==="SUBSCRIBED")$("realtimeStatus").textContent="실시간 연결됨";
+   else if(status==="CHANNEL_ERROR")$("realtimeStatus").textContent="실시간 연결 오류 · Supabase 설정을 확인하세요";
+   else if(status==="TIMED_OUT")$("realtimeStatus").textContent="실시간 연결 시간 초과";
+   else if(status==="CLOSED")$("realtimeStatus").textContent="실시간 연결 종료";
+  });
+}
+
+async function fetchMessages(id){
+ const token=++chatLoadToken;
+ if(!activeChat)return;
+ const type=activeChat.type;
+ const field=type==="one"?"request_id":"group_chat_id";
+ const table=type==="one"?"messages":"group_messages";
+ const {data,error}=await sb.from(table).select("*")
+  .eq(field,Number(id)).order("created_at",{ascending:true});
+ if(token!==chatLoadToken)return;
+ if(error){
+  console.error("메시지 조회 실패",error);
+  $("messages").innerHTML=`<div class="empty">메시지를 불러오지 못했습니다.<br>${esc(error.message)}</div>`;
+  return;
+ }
+ $("messages").innerHTML="";
+ if(!data?.length){
+  $("messages").innerHTML=`<div class="empty">첫 메시지를 보내 보세요.</div>`;
+  return;
+ }
+ data.forEach(appendMessage);
+}
+function appendMessage(m){
+ if(!activeChat)return;
+ const box=$("messages");
+ if(box.querySelector(".empty"))box.innerHTML="";
+ if(box.querySelector(`[data-message-id="${m.id}"]`))return;
+ const mine=m.sender_id===user.id;
+ const bubble=document.createElement("div");
+ bubble.className="bubble"+(mine?" mine":"");
+ bubble.dataset.messageId=m.id;
+ const who=mine?"나":(m.sender_name||"참여자");
+ const date=m.created_at?new Date(m.created_at).toLocaleTimeString("ko-KR",{hour:"2-digit",minute:"2-digit"}):"";
+ const name=document.createElement("div");
+ name.className="who";name.textContent=who;
+ const body=document.createElement("div");
+ body.textContent=m.message||"";
+ const when=document.createElement("div");
+ when.className="when";when.textContent=date;
+ bubble.append(name,body,when);
+ box.appendChild(bubble);
+ box.scrollTop=box.scrollHeight;
+}
+
+$("messageForm").addEventListener("submit",async e=>{
+ e.preventDefault();
+ const message=$("messageInput").value.trim();
+ if(!message||!activeChat||!user)return;
+ const target={...activeChat};
+ $("sendBtn").disabled=true;
+ let result;
+ if(target.type==="one"){
+  const r=requests.find(x=>Number(x.id)===target.id);
+  const p=r&&projects.find(x=>Number(x.id)===Number(r.project_id));
+  if(!r||!p){toast("대화 요청을 찾을 수 없습니다.");$("sendBtn").disabled=false;return}
+  if(r.status!=="수락됨"){toast("수락된 요청만 대화할 수 있습니다.");$("sendBtn").disabled=false;return}
+  const receiver_id=r.sender_id===user.id?p.owner_id:r.sender_id;
+  result=await sb.from("messages").insert({
+   request_id:r.id,sender_id:user.id,receiver_id,message
+  }).select().single();
+ }else{
+  result=await sb.from("group_messages").insert({
+   group_chat_id:target.id,sender_id:user.id,message
+  }).select().single();
+ }
+ $("sendBtn").disabled=false;
+ if(result.error){
+  console.error("메시지 전송 실패",result.error);
+  toast("전송 실패: "+result.error.message);
+  return;
+ }
+ $("messageInput").value="";
+ // Realtime이 늦거나 끊겨도 보낸 메시지는 즉시 표시
+ appendMessage(result.data);
+});
+
+// ------------------------------------------
+// 프로젝트 소유자 전용 단체방 생성
+// ------------------------------------------
+async function openCreateGroup(){
+ if(!sb||!user){toast("로그인 상태를 확인해 주세요.");return}
+ const owned=projects.filter(p=>p.owner_id===user.id);
+ if(!owned.length){
+  toast("내가 만든 프로젝트가 있어야 단체방을 만들 수 있습니다.");
+  return;
+ }
+ showModal(`<h2>단체방 만들기</h2>
+ <p class="muted">프로젝트를 만든 사람만 단체방을 만들 수 있습니다. 참여자는 해당 프로젝트에서 요청이 수락된 사람만 초대할 수 있습니다.</p>
+ <form id="groupForm">
+  <label>프로젝트 선택</label>
+  <select id="groupProject" required>
+   ${owned.map(p=>`<option value="${Number(p.id)}">${esc(p.title)}</option>`).join("")}
+  </select>
+  <label>단체방 이름</label>
+  <input id="groupName" required maxlength="60" placeholder="예: 프로젝트 팀 대화방">
+  <div id="inviteList" class="section"></div>
+  <div class="row" style="margin-top:15px">
+   <button class="primary" type="submit">단체방 생성</button>
+   <button class="secondary" type="button" onclick="closeModal()">취소</button>
+  </div>
+ </form>`);
+ $("groupProject").addEventListener("change",renderInviteList);
+ $("groupForm").addEventListener("submit",createGroup);
+ await renderInviteList();
+}
+async function renderInviteList(){
+ const select=$("groupProject");
+ const container=$("inviteList");
+ if(!select||!container)return;
+ const projectId=Number(select.value);
+ const accepted=requests.filter(r=>
+  Number(r.project_id)===projectId&&r.status==="수락됨"
+ );
+ if(!accepted.length){
+  container.innerHTML=`<p class="muted">이 프로젝트에는 아직 수락된 참여 요청이 없습니다. 방장 본인은 자동으로 참여합니다.</p>`;
+  return;
+ }
+ container.innerHTML=`<b>초대할 참여자</b><p class="muted">초대할 사람을 선택하세요.</p>`+
+ accepted.map(r=>`<label class="checkrow">
+  <input type="checkbox" name="groupInvite" value="${esc(r.sender_id)}">
+  <span>${esc(r.sender_name||"참여자")} · ${esc(r.message||"")}</span>
+ </label>`).join("");
+}
+async function createGroup(e){
+ e.preventDefault();
+ const projectId=Number($("groupProject").value);
+ const name=$("groupName").value.trim();
+ const project=projects.find(p=>Number(p.id)===projectId);
+ if(!project||project.owner_id!==user.id){
+  toast("프로젝트를 만든 사람만 단체방을 만들 수 있습니다.");
+  return;
+ }
+ if(!name){toast("단체방 이름을 입력해 주세요.");return}
+ const invites=[...document.querySelectorAll('input[name="groupInvite"]:checked')].map(x=>x.value);
+ const {data:group,error}=await sb.from("group_chats").insert({
+  project_id:projectId,created_by:user.id,name
+ }).select().single();
+ if(error){toast("단체방 생성 실패: "+error.message);console.error(error);return}
+
+ // 방장 자동 참여
+ const rows=[{group_chat_id:group.id,user_id:user.id,added_by:user.id}];
+ for(const id of invites){
+  if(id!==user.id)rows.push({group_chat_id:group.id,user_id:id,added_by:user.id});
+ }
+ const {error:memberError}=await sb.from("group_chat_members").insert(rows);
+ if(memberError){
+  console.error(memberError);
+  toast("방은 만들어졌지만 참여자 등록에 실패했습니다: "+memberError.message);
+  closeModal();
+  await loadChats();
+  return;
+ }
+ closeModal();
+ toast("단체방을 만들었습니다.");
+ await loadChats();
+ await openChat(group.id,"group");
+}
+
+async function updateMemberSummary(groupId){
+ const {data:members,error}=await sb.from("group_chat_members")
+  .select("user_id").eq("group_chat_id",groupId);
+ if(error){console.error(error);return}
+ groupMemberCache=members||[];
+ $("memberSummary").textContent="참여자 "+groupMemberCache.length+"명";
+}
+async function showMembers(){
+ if(!activeChat||activeChat.type!=="group")return;
+ const {data:members,error}=await sb.from("group_chat_members")
+  .select("user_id,joined_at").eq("group_chat_id",activeChat.id);
+ if(error){toast("참여자 조회 실패: "+error.message);return}
+ const ids=(members||[]).map(m=>m.user_id);
+ let profiles=[];
+ if(ids.length){
+  const result=await sb.from("profiles").select("id,nickname").in("id",ids);
+  if(!result.error)profiles=result.data||[];
+ }
+ const lines=(members||[]).map(m=>{
+  const p=profiles.find(x=>x.id===m.user_id);
+  return `<div class="item">${esc(p?.nickname||(m.user_id===user.id?"나":"참여자"))}
+   ${m.user_id===user.id?'<span class="pill">나</span>':""}</div>`;
+ }).join("");
+ showModal(`<h2>단체방 참여자</h2>${lines||"<p>참여자가 없습니다.</p>"}
+ <button class="secondary" onclick="closeModal()">닫기</button>`);
+}
+async function leaveGroup(){
+ if(!activeChat||activeChat.type!=="group")return;
+ if(!confirm("이 단체방에서 나갈까요?"))return;
+ const id=activeChat.id;
+ const {error}=await sb.from("group_chat_members")
+  .delete().eq("group_chat_id",id).eq("user_id",user.id);
+ if(error){toast("단체방 나가기 실패: "+error.message);return}
+ await stopRealtime();
+ activeChat=null;
+ $("chatTitle").textContent="대화방을 선택해 주세요";
+ $("messages").innerHTML=`<div class="empty">단체방에서 나갔습니다.</div>`;
+ $("messageInput").disabled=true;
+ $("sendBtn").disabled=true;
+ $("membersBtn").classList.add("hidden");
+ $("leaveGroupBtn").classList.add("hidden");
+ await loadChats();
+ toast("단체방에서 나왔습니다.");
+}
+
+// ------------------------------------------
+// 시작
+// ------------------------------------------
+async function init(){
+ if(!configured){
+  projects=seed;
+  renderHome();renderExplore();
+  toast("config.js의 Supabase 설정을 확인해 주세요.");
+  return;
+ }
+ try{
+  sb=window.supabase.createClient(
+   window.EUM_CONFIG.SUPABASE_URL,
+   window.EUM_CONFIG.SUPABASE_ANON_KEY
+  );
+  const {data,error}=await sb.auth.getSession();
+  if(error)throw error;
+  user=data.session?.user||null;
+  if(!user){
+   const auth=await sb.auth.signInAnonymously();
+   if(auth.error)throw auth.error;
+   user=auth.data.user;
+  }
+  await loadProjects();
+  await loadProfile();
+  await loadRequests();
+  await renderProfile();
+  renderHome();
+  renderExplore();
+ }catch(error){
+  console.error(error);
+  toast("연결 실패: "+(error.message||"Supabase 설정을 확인해 주세요."));
+ }
+}
+window.addEventListener("beforeunload",()=>{
+ if(chatChannel&&sb)sb.removeChannel(chatChannel);
+});
 init();
 </script>
-
 </body>
 </html>
