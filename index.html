@@ -1,125 +1,531 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>E:UM | 세대와 세대를 잇다</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E:UM</title>
+
 <style>
-:root{--green:#245b46;--green2:#34765b;--mint:#eaf2ed;--ink:#202a25;--muted:#718078;--line:#e4eae6;--bg:#f7f9f7;--gold:#d6a94e}
+:root{
+  --green:#245b46;
+  --green2:#34765b;
+  --mint:#eaf2ed;
+  --ink:#202a25;
+  --muted:#718078;
+  --line:#e4eae6;
+  --bg:#f7f9f7;
+}
+
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,Pretendard,"Noto Sans KR",Arial,sans-serif}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:Arial,"Noto Sans KR",sans-serif;
+}
+
 button,input,select,textarea{font:inherit}
 button{cursor:pointer}
-header{min-height:72px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:12px max(5vw,24px);position:sticky;top:0;z-index:5;gap:12px;flex-wrap:wrap}
-.logo{font-size:25px;font-weight:850;letter-spacing:-1px;color:var(--green);cursor:pointer}
-.logo small{font-size:11px;letter-spacing:1px;color:#83948a;margin-left:8px}
-nav{display:flex;gap:18px;align-items:center}
-nav button{border:0;background:none;color:#536158;font-weight:650;padding:10px 2px}
-nav button.active{color:var(--green);border-bottom:2px solid var(--green)}
-.btn{border:0;border-radius:10px;padding:11px 16px;font-weight:750;background:var(--green);color:white}
-.btn:hover{background:var(--green2)}
-.btn.light{background:var(--mint);color:var(--green)}
-.btn.outline{background:white;color:var(--green);border:1px solid #cbd9d0}
-.btn.danger{background:#9b3d3d}
-.btn.small{padding:8px 11px;font-size:12px}
-main{max-width:1120px;margin:auto;padding:32px 24px 70px}
-.hero{background:linear-gradient(115deg,#eaf2ed,#f5f7f2 60%,#e5eee8);border-radius:24px;padding:50px 6%;display:grid;grid-template-columns:1.2fr .8fr;gap:25px;align-items:center}
-.eyebrow{font-size:12px;letter-spacing:2px;font-weight:800;color:var(--green2)}
-h1{font-size:clamp(34px,5vw,52px);line-height:1.18;letter-spacing:-2px;margin:16px 0}
-h1 span{color:var(--green)}
-.hero p{color:#627168;line-height:1.8}
-.hero-art{height:210px;display:grid;place-items:center;position:relative}
-.orb{width:165px;height:165px;border-radius:50%;background:#d4e5d9;display:grid;place-items:center;color:var(--green);font-size:55px;font-weight:900;box-shadow:20px 18px 0 #e4ece5}
-.tag{position:absolute;background:white;border:1px solid var(--line);padding:10px 13px;border-radius:12px;font-size:12px;font-weight:750}
-.tag.a{top:10px;left:0}
-.tag.b{right:0;bottom:10px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0 38px}
-.stat{background:white;border:1px solid var(--line);border-radius:15px;padding:17px 20px}
-.stat b{display:block;font-size:23px;color:var(--green)}
-.stat span{font-size:12px;color:var(--muted)}
-.section-head{display:flex;justify-content:space-between;align-items:end;margin:32px 0 16px;gap:12px}
-.section-head h2{margin:0;font-size:23px}
-.section-head p{margin:6px 0 0;color:var(--muted);font-size:13px}
-.filters{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
-.chip{border:1px solid var(--line);background:white;color:#65736b;padding:8px 13px;border-radius:30px;font-size:12px}
-.chip.active{background:var(--green);border-color:var(--green);color:white}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
-.project-card,.request-card,.chat-card{background:white;border:1px solid var(--line);border-radius:16px;padding:19px}
-.project-card{display:flex;flex-direction:column;min-height:245px}
-.card-top{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
-.pill{background:var(--mint);color:var(--green);font-size:11px;font-weight:800;padding:6px 9px;border-radius:30px}
-.pill.gold{background:#f8f1df;color:#8b6824}
-.project-card h3{font-size:17px;line-height:1.45;margin:15px 0 8px}
-.project-card p,.request-card p{font-size:13px;color:var(--muted);line-height:1.65;overflow-wrap:anywhere}
-.meta{font-size:12px;color:#7d8982;margin-top:auto;padding:12px 0;border-top:1px solid #edf0ed}
-.card-actions{display:flex;gap:8px}
-.card-actions button{flex:1}
-.page-title{margin:8px 0 25px}
-.page-title h1{font-size:32px;margin:0 0 8px}
-.page-title p{color:var(--muted);margin:0}
-.panel,.profile-box{background:white;border:1px solid var(--line);border-radius:18px;padding:24px;max-width:800px}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.field{display:flex;flex-direction:column;gap:8px}
-.field.full{grid-column:1/-1}
-.field label{font-size:13px;font-weight:750}
-.field input,.field select,.field textarea{border:1px solid #dce4de;border-radius:10px;padding:12px;background:#fff;outline:none;width:100%}
-.field textarea{min-height:95px;resize:vertical}
-.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--green2)}
-.hint{font-size:11px;color:#87938c}
-.empty{border:1px dashed #cbd8cf;border-radius:15px;padding:26px;text-align:center;color:var(--muted);background:#fbfcfb}
-.empty b{display:block;color:var(--ink);margin-bottom:8px}
-.profile-head{display:flex;align-items:center;gap:14px;margin-bottom:20px}
-.avatar{width:52px;height:52px;border-radius:50%;background:var(--mint);display:grid;place-items:center;color:var(--green);font-size:22px;font-weight:850}
-footer{border-top:1px solid var(--line);padding:24px;text-align:center;color:#87938c;font-size:12px;background:white}
-.modal-back{position:fixed;inset:0;background:#14251dcc;display:none;align-items:center;justify-content:center;padding:18px;z-index:10}
-.modal-back.show{display:flex}
-.modal{background:white;border-radius:18px;padding:24px;max-width:520px;width:100%;max-height:88vh;overflow:auto}
-.modal h2{margin:0 0 10px}
-.modal p{color:var(--muted);font-size:14px;line-height:1.6}
-.modal .field{margin:14px 0}
-.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#203b2d;color:white;padding:12px 18px;border-radius:12px;font-size:13px;display:none;z-index:20;max-width:92%;text-align:center}
-.toast.show{display:block}
-.hidden{display:none!important}
-.chat-layout{display:grid;grid-template-columns:280px 1fr;gap:14px;min-height:440px}
-.chat-list{background:white;border:1px solid var(--line);border-radius:15px;padding:12px}
-.chat-person{display:block;width:100%;text-align:left;background:white;border:1px solid var(--line);border-radius:10px;padding:12px;margin-bottom:8px;color:var(--ink)}
-.chat-person.active{border-color:var(--green);background:var(--mint)}
-.chat-window{background:white;border:1px solid var(--line);border-radius:15px;display:flex;flex-direction:column;min-height:440px;overflow:hidden}
-.chat-head{padding:15px;border-bottom:1px solid var(--line);font-weight:800}
-.messages{padding:15px;flex:1;overflow:auto;max-height:430px;display:flex;flex-direction:column;gap:10px}
-.bubble{max-width:85%;padding:10px 13px;border-radius:14px;background:#f0f3f0;align-self:flex-start;overflow-wrap:anywhere;font-size:14px;white-space:pre-wrap}
-.bubble.mine{background:var(--mint);align-self:flex-end}
-.bubble small{display:block;font-size:10px;color:var(--muted);margin-top:5px}
-.chat-send{display:flex;gap:8px;padding:12px;border-top:1px solid var(--line)}
-.chat-send textarea{flex:1;resize:vertical;min-height:42px;max-height:110px;border:1px solid var(--line);border-radius:10px;padding:10px}
-@media(max-width:760px){
-header{padding:12px 16px}
-nav{width:100%;justify-content:space-between;order:2;gap:8px}
-nav button{font-size:12px}
-.hero{grid-template-columns:1fr;padding:32px 22px}
-.hero-art{height:160px}
-.orb{width:130px;height:130px}
-.cards{grid-template-columns:1fr 1fr}
-.form-grid{grid-template-columns:1fr}
-.field.full{grid-column:auto}
-.chat-layout{grid-template-columns:1fr}
-.chat-list{display:flex;gap:8px;overflow:auto}
-.chat-person{min-width:160px;margin:0}
-.chat-window{min-height:400px}
+
+header{
+  background:white;
+  border-bottom:1px solid var(--line);
+  padding:14px 5%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:12px;
+  position:sticky;
+  top:0;
+  z-index:5;
 }
+
+.logo{
+  font-size:25px;
+  font-weight:900;
+  color:var(--green);
+  cursor:pointer;
+}
+
+nav{
+  display:flex;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+nav button{
+  border:0;
+  background:none;
+  padding:9px 3px;
+  color:#536158;
+  font-weight:bold;
+}
+
+nav button.active{
+  color:var(--green);
+  border-bottom:2px solid var(--green);
+}
+
+.btn{
+  border:0;
+  background:var(--green);
+  color:white;
+  border-radius:9px;
+  padding:11px 15px;
+  font-weight:bold;
+}
+
+.btn:hover{background:var(--green2)}
+
+.btn.light{
+  background:var(--mint);
+  color:var(--green);
+}
+
+.btn.outline{
+  background:white;
+  color:var(--green);
+  border:1px solid #cbd9d0;
+}
+
+.btn.danger{background:#9b3d3d}
+
+.btn.small{
+  padding:8px 11px;
+  font-size:12px;
+}
+
+main{
+  max-width:1120px;
+  margin:auto;
+  padding:30px 22px 70px;
+}
+
+.hero{
+  background:linear-gradient(115deg,#eaf2ed,#f5f7f2);
+  border-radius:23px;
+  padding:50px 6%;
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:20px;
+  align-items:center;
+}
+
+.eyebrow{
+  color:var(--green2);
+  font-size:12px;
+  letter-spacing:2px;
+  font-weight:bold;
+}
+
+h1{
+  font-size:clamp(32px,5vw,50px);
+  line-height:1.2;
+  margin:16px 0;
+}
+
+.hero h1 span{color:var(--green)}
+
+.hero p{
+  color:#627168;
+  line-height:1.8;
+}
+
+.hero-art{
+  display:grid;
+  place-items:center;
+  height:190px;
+}
+
+.orb{
+  width:150px;
+  height:150px;
+  border-radius:50%;
+  background:#d4e5d9;
+  display:grid;
+  place-items:center;
+  color:var(--green);
+  font-size:55px;
+  font-weight:900;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+  margin:20px 0 35px;
+}
+
+.stat,.project-card,.request-card,.panel{
+  background:white;
+  border:1px solid var(--line);
+  border-radius:15px;
+  padding:18px;
+}
+
+.stat b{
+  display:block;
+  font-size:23px;
+  color:var(--green);
+}
+
+.stat span{
+  font-size:12px;
+  color:var(--muted);
+}
+
+.section-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:30px 0 15px;
+  gap:10px;
+}
+
+.section-head h2{margin:0}
+
+.section-head p{
+  font-size:13px;
+  color:var(--muted);
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+
+.project-card{
+  display:flex;
+  flex-direction:column;
+  min-height:240px;
+}
+
+.project-card h3{font-size:17px}
+
+.project-card p{
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.7;
+}
+
+.pill{
+  background:var(--mint);
+  color:var(--green);
+  padding:6px 9px;
+  border-radius:30px;
+  font-size:11px;
+  font-weight:bold;
+}
+
+.meta{
+  margin-top:auto;
+  padding:12px 0;
+  border-top:1px solid #edf0ed;
+  font-size:12px;
+  color:var(--muted);
+}
+
+.card-actions{
+  display:flex;
+  gap:8px;
+}
+
+.card-actions button{flex:1}
+
+.page-title{margin-bottom:25px}
+
+.page-title h1{
+  font-size:32px;
+  margin:0 0 8px;
+}
+
+.page-title p{
+  color:var(--muted);
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.field.full{grid-column:1/-1}
+
+.field label{
+  font-size:13px;
+  font-weight:bold;
+}
+
+.field input,
+.field select,
+.field textarea{
+  width:100%;
+  border:1px solid #dce4de;
+  border-radius:10px;
+  padding:12px;
+  background:white;
+}
+
+.field textarea{
+  min-height:95px;
+  resize:vertical;
+}
+
+.profile-box{
+  background:white;
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:24px;
+  max-width:800px;
+}
+
+.profile-head{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-bottom:20px;
+}
+
+.avatar{
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  background:var(--mint);
+  display:grid;
+  place-items:center;
+  color:var(--green);
+  font-weight:bold;
+  font-size:22px;
+}
+
+.empty{
+  background:white;
+  border:1px dashed #cbd8cf;
+  border-radius:14px;
+  padding:25px;
+  text-align:center;
+  color:var(--muted);
+}
+
+.request-card{margin-bottom:12px}
+
+.request-card p{
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.6;
+}
+
+.hint{
+  color:var(--muted);
+  font-size:12px;
+}
+
+.filters{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin:14px 0;
+}
+
+.chip{
+  border:1px solid var(--line);
+  background:white;
+  border-radius:25px;
+  padding:8px 13px;
+  font-size:12px;
+}
+
+.chip.active{
+  background:var(--green);
+  color:white;
+}
+
+.chat-layout{
+  display:grid;
+  grid-template-columns:260px 1fr;
+  gap:14px;
+  min-height:450px;
+}
+
+.chat-list{
+  background:white;
+  border:1px solid var(--line);
+  border-radius:15px;
+  padding:12px;
+}
+
+.chat-person{
+  display:block;
+  width:100%;
+  text-align:left;
+  background:white;
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:12px;
+  margin-bottom:8px;
+  color:var(--ink);
+}
+
+.chat-person.active{
+  background:var(--mint);
+  border-color:var(--green);
+}
+
+.chat-window{
+  background:white;
+  border:1px solid var(--line);
+  border-radius:15px;
+  display:flex;
+  flex-direction:column;
+  min-height:450px;
+  overflow:hidden;
+}
+
+.chat-head{
+  padding:16px;
+  border-bottom:1px solid var(--line);
+  font-weight:bold;
+}
+
+.messages{
+  padding:15px;
+  flex:1;
+  overflow:auto;
+  max-height:450px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.bubble{
+  max-width:85%;
+  padding:11px 14px;
+  border-radius:14px;
+  background:#f0f3f0;
+  align-self:flex-start;
+  overflow-wrap:anywhere;
+  white-space:pre-wrap;
+  font-size:14px;
+}
+
+.bubble.mine{
+  background:var(--mint);
+  align-self:flex-end;
+}
+
+.bubble small{
+  display:block;
+  font-size:10px;
+  color:var(--muted);
+  margin-top:5px;
+}
+
+.chat-send{
+  display:flex;
+  gap:8px;
+  padding:12px;
+  border-top:1px solid var(--line);
+}
+
+.chat-send textarea{
+  flex:1;
+  min-height:42px;
+  max-height:110px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:10px;
+  resize:vertical;
+}
+
+.modal-back{
+  position:fixed;
+  inset:0;
+  background:#14251dcc;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  z-index:10;
+}
+
+.modal-back.show{display:flex}
+
+.modal{
+  background:white;
+  border-radius:18px;
+  padding:24px;
+  max-width:520px;
+  width:100%;
+  max-height:88vh;
+  overflow:auto;
+}
+
+.toast{
+  position:fixed;
+  bottom:22px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#203b2d;
+  color:white;
+  padding:12px 18px;
+  border-radius:12px;
+  display:none;
+  z-index:20;
+  max-width:92%;
+}
+
+.toast.show{display:block}
+
+.hidden{display:none!important}
+
+footer{
+  background:white;
+  border-top:1px solid var(--line);
+  padding:25px;
+  text-align:center;
+  color:var(--muted);
+  font-size:12px;
+}
+
+@media(max-width:760px){
+  header{padding:12px 16px}
+  nav{
+    width:100%;
+    justify-content:space-between;
+    gap:6px;
+  }
+  nav button{font-size:12px}
+  .hero{grid-template-columns:1fr;padding:30px 22px}
+  .cards{grid-template-columns:1fr 1fr}
+  .chat-layout{grid-template-columns:1fr}
+  .chat-list{display:flex;gap:8px;overflow:auto}
+  .chat-person{min-width:150px}
+}
+
 @media(max-width:520px){
-.cards{grid-template-columns:1fr}
-.stats{grid-template-columns:1fr 1fr}
-.stats .stat:last-child{grid-column:1/-1}
-main{padding:22px 15px 55px}
-.page-title h1{font-size:28px}
-.chat-send{flex-direction:column}
+  .cards{grid-template-columns:1fr}
+  .form-grid{grid-template-columns:1fr}
+  .field.full{grid-column:auto}
+  main{padding:22px 15px 55px}
+  .chat-send{flex-direction:column}
 }
 </style>
 </head>
+
 <body>
+
 <header>
-  <div class="logo" onclick="go('home')">E:UM <small>CONNECT GENERATIONS</small></div>
+  <div class="logo" onclick="go('home')">E:UM</div>
+
   <nav>
     <button id="nav-home" class="active" onclick="go('home')">홈</button>
     <button id="nav-explore" onclick="go('explore')">프로젝트 찾기</button>
@@ -127,44 +533,48 @@ main{padding:22px 15px 55px}
     <button id="nav-profile" onclick="go('profile')">내 프로필</button>
     <button id="nav-chat" onclick="go('chat')">대화창</button>
   </nav>
-  <button class="btn small" id="loginBtn" onclick="go('profile')">내 프로필</button>
+
+  <button class="btn small" onclick="go('profile')">내 프로필</button>
 </header>
 
 <main>
+
 <section id="homePage">
   <div class="hero">
     <div>
-      <div class="eyebrow">EXPERIENCE MEETS POSSIBILITY</div>
+      <div class="eyebrow">CONNECT GENERATIONS</div>
       <h1>서로 다른 경험이<br><span>새로운 가능성</span>이 됩니다.</h1>
-      <p>세대와 분야의 경계를 넘어, 서로의 경험과 역량을 나누고 함께 프로젝트를 만들어 보세요.</p>
-      <button class="btn" onclick="go('explore')">프로젝트 둘러보기 →</button>
+      <p>세대와 분야의 경계를 넘어 서로의 경험과 역량을 나누고 함께 프로젝트를 만들어 보세요.</p>
+      <button class="btn" onclick="go('explore')">프로젝트 둘러보기</button>
       <button class="btn light" onclick="go('create')">프로젝트 등록</button>
     </div>
-    <div class="hero-art">
-      <div class="orb">E</div>
-      <div class="tag a">경험을 나누고</div>
-      <div class="tag b">가능성을 연결하다 ✦</div>
-    </div>
+    <div class="hero-art"><div class="orb">E</div></div>
   </div>
 
   <div class="stats">
-    <div class="stat"><b id="statProjects">0</b><span>함께할 프로젝트</span></div>
-    <div class="stat"><b>4가지</b><span>매칭 방식</span></div>
-    <div class="stat"><b>ONE : ONE</b><span>연결에서 협업까지</span></div>
+    <div class="stat"><b id="statProjects">0</b><span>프로젝트</span></div>
+    <div class="stat"><b>1:1</b><span>개인 대화</span></div>
+    <div class="stat"><b>E:UM</b><span>세대 연결</span></div>
   </div>
 
   <div class="section-head">
-    <div><h2>함께할 프로젝트</h2><p>다양한 경험과 역량이 만나는 협업의 시작</p></div>
+    <h2>함께할 프로젝트</h2>
     <button class="btn outline small" onclick="go('explore')">전체 보기</button>
   </div>
+
   <div class="cards" id="homeCards"></div>
 </section>
 
 <section id="explorePage" class="hidden">
-  <div class="page-title"><h1>프로젝트 찾기</h1><p>관심 분야에 맞는 프로젝트를 찾아보세요.</p></div>
-  <div class="field">
-    <input id="searchInput" placeholder="프로젝트 제목이나 분야 검색..." oninput="renderExplore()">
+  <div class="page-title">
+    <h1>프로젝트 찾기</h1>
+    <p>관심 있는 프로젝트를 찾아보세요.</p>
   </div>
+
+  <div class="field">
+    <input id="searchInput" placeholder="프로젝트 검색..." oninput="renderExplore()">
+  </div>
+
   <div class="filters">
     <button class="chip active" data-filter="전체" onclick="setFilter('전체')">전체</button>
     <button class="chip" data-filter="IT·기술" onclick="setFilter('IT·기술')">IT·기술</button>
@@ -172,133 +582,238 @@ main{padding:22px 15px 55px}
     <button class="chip" data-filter="마케팅" onclick="setFilter('마케팅')">마케팅</button>
     <button class="chip" data-filter="교육" onclick="setFilter('교육')">교육</button>
   </div>
+
   <div class="filters">
-    <button class="chip active" data-scope="전체" onclick="setScope('전체')">모든 매칭</button>
-    <button class="chip" data-scope="1:1 개인 매칭" onclick="setScope('1:1 개인 매칭')">1:1 개인</button>
+    <button class="chip active" data-scope="전체" onclick="setScope('전체')">전체 매칭</button>
+    <button class="chip" data-scope="1:1 개인 매칭" onclick="setScope('1:1 개인 매칭')">1:1</button>
     <button class="chip" data-scope="세대 간 매칭" onclick="setScope('세대 간 매칭')">세대 간</button>
     <button class="chip" data-scope="그룹 매칭" onclick="setScope('그룹 매칭')">그룹</button>
     <button class="chip" data-scope="분야별 매칭" onclick="setScope('분야별 매칭')">분야별</button>
   </div>
+
   <div class="cards" id="exploreCards"></div>
 </section>
 
 <section id="createPage" class="hidden">
-  <div class="page-title"><h1>프로젝트 등록</h1><p>함께 만들고 싶은 프로젝트를 소개해 주세요.</p></div>
+  <div class="page-title">
+    <h1>프로젝트 등록</h1>
+    <p>함께하고 싶은 프로젝트를 소개하세요.</p>
+  </div>
+
   <form class="panel" id="projectForm">
     <div class="form-grid">
-      <div class="field full"><label>프로젝트 제목 *</label><input name="title" required maxlength="55"></div>
+
+      <div class="field full">
+        <label>프로젝트 제목 *</label>
+        <input name="title" required maxlength="55">
+      </div>
+
       <div class="field">
-        <label>대표 분야 *</label>
+        <label>분야 *</label>
         <select name="category" required>
-          <option value="">분야 선택</option><option>IT·기술</option><option>디자인</option><option>마케팅</option><option>교육</option><option>경영·창업</option><option>문화·예술</option><option>기타</option>
+          <option value="">선택</option>
+          <option>IT·기술</option>
+          <option>디자인</option>
+          <option>마케팅</option>
+          <option>교육</option>
+          <option>경영·창업</option>
+          <option>문화·예술</option>
+          <option>기타</option>
         </select>
       </div>
+
       <div class="field">
-        <label>매칭 범위 *</label>
+        <label>매칭 방식 *</label>
         <select name="scope" required>
-          <option value="">범위 선택</option><option>1:1 개인 매칭</option><option>세대 간 매칭</option><option>그룹 매칭</option><option>분야별 매칭</option>
+          <option value="">선택</option>
+          <option>1:1 개인 매칭</option>
+          <option>세대 간 매칭</option>
+          <option>그룹 매칭</option>
+          <option>분야별 매칭</option>
         </select>
       </div>
-      <div class="field"><label>모집 인원</label><select name="members"><option>2명</option><option>3~4명</option><option>5명 이상</option></select></div>
-      <div class="field"><label>진행 방식</label><select name="method"><option>온라인 중심</option><option>오프라인 중심</option><option>온라인·오프라인 병행</option></select></div>
-      <div class="field full"><label>프로젝트 소개 *</label><textarea name="description" required maxlength="500"></textarea></div>
-      <div class="field"><label>제공할 역량</label><input name="provide"></div>
-      <div class="field"><label>필요한 역량</label><input name="need"></div>
-      <div class="field full"><button class="btn" type="submit">프로젝트 게시하기</button></div>
+
+      <div class="field">
+        <label>모집 인원</label>
+        <select name="members">
+          <option>2명</option>
+          <option>3~4명</option>
+          <option>5명 이상</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>진행 방식</label>
+        <select name="method">
+          <option>온라인 중심</option>
+          <option>오프라인 중심</option>
+          <option>온라인·오프라인 병행</option>
+        </select>
+      </div>
+
+      <div class="field full">
+        <label>프로젝트 소개 *</label>
+        <textarea name="description" required maxlength="500"></textarea>
+      </div>
+
+      <div class="field">
+        <label>제공할 역량</label>
+        <input name="provide">
+      </div>
+
+      <div class="field">
+        <label>필요한 역량</label>
+        <input name="need">
+      </div>
+
+      <div class="field full">
+        <button class="btn" type="submit">프로젝트 등록하기</button>
+      </div>
+
     </div>
   </form>
 </section>
 
 <section id="profilePage" class="hidden">
-  <div class="page-title"><h1>내 프로필</h1><p>프로필을 저장하고 받은 요청을 확인하세요.</p></div>
+  <div class="page-title">
+    <h1>내 프로필</h1>
+    <p>프로필을 저장하고 받은 요청을 확인하세요.</p>
+  </div>
+
   <form class="profile-box" id="profileForm">
     <div class="profile-head">
       <div class="avatar" id="avatarLetter">E</div>
-      <div><b id="profileName">프로필 미등록</b><div class="hint">나의 협업 프로필</div></div>
+      <div>
+        <b id="profileName">프로필 미등록</b>
+        <div class="hint">나의 협업 프로필</div>
+      </div>
     </div>
+
     <div class="form-grid">
-      <div class="field"><label>닉네임 *</label><input name="nickname" required maxlength="20"></div>
+      <div class="field">
+        <label>닉네임 *</label>
+        <input name="nickname" required maxlength="20">
+      </div>
+
       <div class="field">
         <label>연령대</label>
-        <select name="age"><option>선택 안 함</option><option>청년층</option><option>장년층</option><option>기타</option></select>
+        <select name="age">
+          <option>선택 안 함</option>
+          <option>청년층</option>
+          <option>장년층</option>
+          <option>기타</option>
+        </select>
       </div>
+
       <div class="field">
         <label>관심 분야</label>
-        <select name="interest"><option>IT·기술</option><option>디자인</option><option>마케팅</option><option>교육</option><option>경영·창업</option><option>문화·예술</option><option>기타</option></select>
+        <select name="interest">
+          <option>IT·기술</option>
+          <option>디자인</option>
+          <option>마케팅</option>
+          <option>교육</option>
+          <option>경영·창업</option>
+          <option>문화·예술</option>
+          <option>기타</option>
+        </select>
       </div>
-      <div class="field"><label>보유 역량</label><input name="skills"></div>
-      <div class="field full"><label>자기소개</label><textarea name="intro"></textarea></div>
-      <div class="field full"><button class="btn" type="submit">프로필 저장</button></div>
+
+      <div class="field">
+        <label>보유 역량</label>
+        <input name="skills">
+      </div>
+
+      <div class="field full">
+        <label>자기소개</label>
+        <textarea name="intro"></textarea>
+      </div>
+
+      <div class="field full">
+        <button class="btn" type="submit">프로필 저장</button>
+      </div>
     </div>
   </form>
 
   <div class="section-head">
-    <div><h2>받은 대화 요청</h2><p>내 프로젝트에 도착한 요청을 수락하거나 거절하세요.</p></div>
+    <h2>받은 대화 요청</h2>
     <button class="btn outline small" onclick="refreshAll()">새로고침</button>
   </div>
   <div id="receivedRequests" class="empty">불러오는 중...</div>
 
   <div class="section-head">
-    <div><h2>내가 보낸 대화 요청</h2><p>내 요청의 진행 상태를 확인하세요.</p></div>
+    <h2>내가 보낸 요청</h2>
   </div>
   <div id="myRequests" class="empty">불러오는 중...</div>
 </section>
 
 <section id="chatPage" class="hidden">
-  <div class="page-title"><h1>대화창</h1><p>요청이 수락된 상대와 대화할 수 있습니다.</p></div>
+  <div class="page-title">
+    <h1>대화창</h1>
+    <p>수락된 상대와 실시간으로 대화할 수 있습니다.</p>
+  </div>
+
   <div class="chat-layout">
-    <div class="chat-list" id="chatList"><div class="empty">수락된 대화가 여기에 표시됩니다.</div></div>
+    <div class="chat-list" id="chatList">
+      <div class="empty">대화 목록이 없습니다.</div>
+    </div>
+
     <div class="chat-window">
-      <div class="chat-head" id="chatTitle">대화할 상대를 선택하세요</div>
-      <div class="messages" id="messages"><div class="empty">왼쪽에서 대화를 선택하세요.</div></div>
+      <div class="chat-head" id="chatTitle">대화할 상대를 선택하세요.</div>
+
+      <div class="messages" id="messages">
+        <div class="empty">왼쪽에서 대화를 선택하세요.</div>
+      </div>
+
       <form class="chat-send" id="messageForm">
         <textarea id="messageInput" maxlength="2000" placeholder="메시지를 입력하세요..." required></textarea>
         <button class="btn" type="submit">보내기</button>
       </form>
     </div>
   </div>
-  <div class="hint" style="margin-top:10px">채팅은 프로젝트 요청이 수락된 뒤에만 사용할 수 있습니다. 새로고침 버튼으로 새 메시지를 불러오세요.</div>
-  <button class="btn outline small" style="margin-top:12px" onclick="loadChats()">대화 목록 새로고침</button>
+
+  <p class="hint" id="realtimeStatus">실시간 연결 상태: 대기 중</p>
+
+  <button class="btn outline small" onclick="loadChats()">대화 목록 새로고침</button>
 </section>
+
 </main>
 
 <footer>
-E:UM · 세대와 경험을 연결하는 협업 플랫폼<br><br>
-학교 프로젝트용 시제품입니다. 실제 개인정보는 입력하지 마세요.
+  E:UM · 세대와 경험을 연결하는 협업 플랫폼
 </footer>
 
 <div class="modal-back" id="modalBack" onclick="if(event.target===this)closeModal()">
   <div class="modal" id="modalContent"></div>
 </div>
+
 <div class="toast" id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="config.js"></script>
+
 <script>
-const $=id=>document.getElementById(id);
+const $ = id => document.getElementById(id);
 
-const seed=[
-{title:"지역 소상공인 홍보 콘텐츠 만들기",category:"마케팅",scope:"세대 간 매칭",members:"3~4명",method:"온라인·오프라인 병행",description:"지역의 작은 가게를 알릴 카드뉴스와 짧은 홍보 영상을 함께 제작합니다.",provide:"SNS 운영, 콘텐츠 기획",need:"그래픽 디자인, 영상 편집",author:"이음기획자"},
-{title:"초보 개발자를 위한 아이디어 멘토링",category:"IT·기술",scope:"1:1 개인 매칭",members:"2명",method:"온라인 중심",description:"웹사이트 제작을 시작한 사람들과 실무 경험 및 학습 방향을 나눕니다.",provide:"웹 기초 지식, 아이디어",need:"개발 경험, 프로젝트 조언",author:"코드새싹"},
-{title:"세대가 함께 만드는 동네 기록집",category:"디자인",scope:"그룹 매칭",members:"5명 이상",method:"온라인·오프라인 병행",description:"동네의 오래된 장소와 이야기를 사진과 글로 기록합니다.",provide:"인터뷰, 글쓰기",need:"사진 촬영, 편집 디자인",author:"동네기록단"}
-];
+const config = window.EUM_CONFIG || {};
 
-let projects=[];
-let profile=null;
-let requests=[];
-let sb=null;
-let user=null;
-let activeCategory="전체";
-let activeScope="전체";
-let activeChat=null;
+const SUPABASE_URL = config.SUPABASE_URL;
+const SUPABASE_KEY = config.SUPABASE_ANON_KEY;
 
-const config=window.EUM_CONFIG||{};
-const supabaseUrl=config.SUPABASE_URL;
-const supabaseKey=config.SUPABASE_ANON_KEY;
-const configured=!!(supabaseUrl&&supabaseKey);
+let sb = null;
+let user = null;
+let profile = null;
+let projects = [];
+let requests = [];
 
-function esc(s=""){
-  return String(s).replace(/[&<>"']/g,c=>({
+let activeCategory = "전체";
+let activeScope = "전체";
+let activeChat = null;
+
+let chatChannel = null;
+let messageLoadToken = 0;
+
+function esc(value=""){
+  return String(value).replace(/[&<>"']/g,c=>({
     "&":"&amp;",
     "<":"&lt;",
     ">":"&gt;",
@@ -307,14 +822,17 @@ function esc(s=""){
   }[c]));
 }
 
-function toast(s){
-  $("toast").textContent=s;
+function toast(message){
+  $("toast").textContent = message;
   $("toast").classList.add("show");
-  setTimeout(()=>$("toast").classList.remove("show"),3000);
+
+  setTimeout(()=>{
+    $("toast").classList.remove("show");
+  },3000);
 }
 
 function showModal(html){
-  $("modalContent").innerHTML=html;
+  $("modalContent").innerHTML = html;
   $("modalBack").classList.add("show");
 }
 
@@ -328,24 +846,29 @@ function go(page){
     $("nav-"+p).classList.toggle("active",p===page);
   });
 
-  if(page==="profile")renderProfile();
-  if(page==="chat")loadChats();
+  if(page==="profile"){
+    renderProfile();
+  }
+
+  if(page==="chat"){
+    loadChats();
+  }
 
   window.scrollTo({top:0,behavior:"smooth"});
 }
 
+/* 프로젝트 카드 */
+
 function card(p){
   return `
   <article class="project-card">
-    <div class="card-top">
-      <span class="pill">${esc(p.scope)}</span>
-      <span class="hint">${esc(p.category)}</span>
-    </div>
+    <div><span class="pill">${esc(p.scope)}</span></div>
     <h3>${esc(p.title)}</h3>
     <p>${esc(p.description)}</p>
     <div class="meta">
-      모집 ${esc(p.members||"미정")} · ${esc(p.method||"미정")}<br>
-      작성자 ${esc(p.author||"익명")}
+      분야: ${esc(p.category)}<br>
+      모집: ${esc(p.members||"미정")}<br>
+      작성자: ${esc(p.author||"익명")}
     </div>
     <div class="card-actions">
       <button class="btn outline small" onclick="detail(${Number(p.id)})">자세히</button>
@@ -355,65 +878,72 @@ function card(p){
 }
 
 function renderHome(){
-  $("homeCards").innerHTML=projects.slice(0,3).map(card).join("")||
-    `<div class="empty">아직 등록된 프로젝트가 없습니다.</div>`;
-  $("statProjects").textContent=projects.length;
+  $("homeCards").innerHTML = projects.slice(0,3).map(card).join("") ||
+    `<div class="empty">등록된 프로젝트가 없습니다.</div>`;
+
+  $("statProjects").textContent = projects.length;
 }
 
 function renderExplore(){
-  const q=($("searchInput")?.value||"").toLowerCase();
+  const q = ($("searchInput")?.value||"").toLowerCase();
 
-  const list=projects.filter(p=>
-    (activeCategory==="전체"||p.category===activeCategory)&&
-    (activeScope==="전체"||p.scope===activeScope)&&
+  const list = projects.filter(p=>
+    (activeCategory==="전체" || p.category===activeCategory) &&
+    (activeScope==="전체" || p.scope===activeScope) &&
     (`${p.title} ${p.description} ${p.category} ${p.need||""} ${p.provide||""}`).toLowerCase().includes(q)
   );
 
-  $("exploreCards").innerHTML=list.map(card).join("")||
-    `<div class="empty" style="grid-column:1/-1">검색 결과가 없습니다.</div>`;
+  $("exploreCards").innerHTML = list.map(card).join("") ||
+    `<div class="empty">검색 결과가 없습니다.</div>`;
 }
 
-function setFilter(v){
-  activeCategory=v;
-  document.querySelectorAll("[data-filter]").forEach(b=>
-    b.classList.toggle("active",b.dataset.filter===v)
-  );
+function setFilter(value){
+  activeCategory=value;
+
+  document.querySelectorAll("[data-filter]").forEach(b=>{
+    b.classList.toggle("active",b.dataset.filter===value);
+  });
+
   renderExplore();
 }
 
-function setScope(v){
-  activeScope=v;
-  document.querySelectorAll("[data-scope]").forEach(b=>
-    b.classList.toggle("active",b.dataset.scope===v)
-  );
+function setScope(value){
+  activeScope=value;
+
+  document.querySelectorAll("[data-scope]").forEach(b=>{
+    b.classList.toggle("active",b.dataset.scope===value);
+  });
+
   renderExplore();
 }
 
 function detail(id){
-  const p=projects.find(x=>Number(x.id)===Number(id));
+  const p = projects.find(x=>Number(x.id)===Number(id));
   if(!p)return;
 
   showModal(`
     <span class="pill">${esc(p.scope)}</span>
-    <h2 style="margin-top:14px">${esc(p.title)}</h2>
+    <h2>${esc(p.title)}</h2>
     <p>${esc(p.description)}</p>
     <p>
-      <b>분야:</b> ${esc(p.category)}<br>
-      <b>제공 역량:</b> ${esc(p.provide||"미입력")}<br>
-      <b>필요 역량:</b> ${esc(p.need||"미입력")}<br>
-      <b>작성자:</b> ${esc(p.author||"익명")}
+      분야: ${esc(p.category)}<br>
+      제공 역량: ${esc(p.provide||"미입력")}<br>
+      필요 역량: ${esc(p.need||"미입력")}<br>
+      작성자: ${esc(p.author||"익명")}
     </p>
     <button class="btn" onclick="requestProject(${Number(p.id)})">대화 요청</button>
     <button class="btn outline" onclick="closeModal()">닫기</button>
   `);
 }
 
+/* 대화 요청 */
+
 async function requestProject(id){
-  const p=projects.find(x=>Number(x.id)===Number(id));
+  const p = projects.find(x=>Number(x.id)===Number(id));
   if(!p)return;
 
-  if(!user||!profile){
-    toast("먼저 내 프로필을 저장해 주세요.");
+  if(!user || !profile){
+    toast("먼저 프로필을 저장해 주세요.");
     go("profile");
     return;
   }
@@ -425,30 +955,33 @@ async function requestProject(id){
 
   showModal(`
     <h2>대화 요청하기</h2>
-    <p><b>${esc(p.title)}</b></p>
+    <p>${esc(p.title)}</p>
+
     <div class="field">
       <label>닉네임</label>
-      <input id="requestName" value="${esc(profile.nickname)}" maxlength="20">
+      <input id="requestName" value="${esc(profile.nickname)}">
     </div>
+
     <div class="field">
       <label>요청 메시지</label>
-      <textarea id="requestMessage" maxlength="1000" placeholder="함께하고 싶은 이유를 적어 주세요."></textarea>
+      <textarea id="requestMessage" maxlength="1000"></textarea>
     </div>
+
     <button class="btn" onclick="sendRequest(${Number(p.id)})">요청 보내기</button>
     <button class="btn outline" onclick="closeModal()">취소</button>
   `);
 }
 
 async function sendRequest(projectId){
-  const msg=$("requestMessage").value.trim();
-  const name=$("requestName").value.trim()||profile.nickname;
+  const message = $("requestMessage").value.trim();
+  const name = $("requestName").value.trim() || profile.nickname;
 
-  if(!msg){
-    toast("요청 메시지를 작성해 주세요.");
+  if(!message){
+    toast("요청 메시지를 입력해 주세요.");
     return;
   }
 
-  const {data:old,error:checkError}=await sb
+  const {data:old,error:checkError} = await sb
     .from("match_requests")
     .select("id")
     .eq("project_id",projectId)
@@ -461,16 +994,18 @@ async function sendRequest(projectId){
   }
 
   if(old){
-    toast("이미 이 프로젝트에 요청을 보냈습니다.");
+    toast("이미 요청을 보냈습니다.");
     return;
   }
 
-  const {error}=await sb.from("match_requests").insert({
-    project_id:projectId,
-    sender_id:user.id,
-    sender_name:name,
-    message:msg
-  });
+  const {error} = await sb
+    .from("match_requests")
+    .insert({
+      project_id:projectId,
+      sender_id:user.id,
+      sender_name:name,
+      message:message
+    });
 
   if(error){
     toast("요청 실패: "+error.message);
@@ -479,21 +1014,25 @@ async function sendRequest(projectId){
 
   closeModal();
   toast("대화 요청을 보냈습니다.");
+
   await refreshAll();
 }
 
+/* 요청 수락 및 거절 */
+
 async function changeRequest(id,status){
-  const {error}=await sb
+  const {error} = await sb
     .from("match_requests")
     .update({status})
     .eq("id",id);
 
   if(error){
-    toast("요청 상태 변경 실패: "+error.message);
+    toast("상태 변경 실패: "+error.message);
     return;
   }
 
   toast(status==="수락됨"?"요청을 수락했습니다.":"요청을 거절했습니다.");
+
   await refreshAll();
 }
 
@@ -503,12 +1042,11 @@ function renderProfile(){
   if(profile){
     $("profileName").textContent=profile.nickname;
     $("avatarLetter").textContent=(profile.nickname||"E").slice(0,1);
-    $("loginBtn").textContent=profile.nickname;
 
     const f=$("profileForm");
 
     ["nickname","age","interest","skills","intro"].forEach(k=>{
-      if(f.elements[k]&&profile[k]!=null){
+      if(f.elements[k] && profile[k]!=null){
         f.elements[k].value=profile[k];
       }
     });
@@ -520,49 +1058,47 @@ function renderProfile(){
     const p=projects.find(x=>Number(x.id)===Number(r.project_id));
 
     return `
-      <div class="request-card" style="margin-bottom:10px">
-        <div class="card-top">
-          <b>${esc(p?.title||"프로젝트")}</b>
-          <span class="pill ${r.status==="수락됨"?"gold":""}">${esc(r.status||"요청 대기")}</span>
-        </div>
+      <div class="request-card">
+        <b>${esc(p?.title||"프로젝트")}</b>
         <p>${esc(r.message)}</p>
-        ${r.status==="수락됨"?`
-          <button class="btn small" onclick="openChat(${Number(r.id)})">대화 열기</button>
-        `:""}
+        <span class="pill">${esc(r.status||"요청 대기")}</span>
+
+        ${r.status==="수락됨"?
+          `<button class="btn small" onclick="openChat(${Number(r.id)})">대화 열기</button>`
+          :""}
       </div>
     `;
-  }).join("")||`<div class="empty">아직 보낸 요청이 없습니다.</div>`;
+  }).join("") || `<div class="empty">보낸 요청이 없습니다.</div>`;
 
   const incoming=requests.filter(r=>{
     const p=projects.find(x=>Number(x.id)===Number(r.project_id));
-    return p&&p.owner_id===user.id&&r.sender_id!==user.id;
+    return p && p.owner_id===user.id && r.sender_id!==user.id;
   });
 
   $("receivedRequests").innerHTML=incoming.map(r=>{
     const p=projects.find(x=>Number(x.id)===Number(r.project_id));
 
     return `
-      <div class="request-card" style="margin-bottom:10px">
-        <div class="card-top">
-          <span class="pill">받은 요청</span>
-          <span class="pill ${r.status==="수락됨"?"gold":""}">${esc(r.status||"요청 대기")}</span>
-        </div>
-
+      <div class="request-card">
+        <span class="pill">받은 요청</span>
         <h3>${esc(p?.title||"내 프로젝트")}</h3>
-        <p><b>보낸 사람:</b> ${esc(r.sender_name)}</p>
+        <p>보낸 사람: ${esc(r.sender_name)}</p>
         <p>${esc(r.message)}</p>
+        <span class="pill">${esc(r.status||"요청 대기")}</span>
 
-        ${r.status==="요청 대기"||!r.status?`
-          <button class="btn small" onclick="changeRequest(${Number(r.id)},'수락됨')">수락</button>
-          <button class="btn danger small" onclick="changeRequest(${Number(r.id)},'거절됨')">거절</button>
+        ${!r.status || r.status==="요청 대기" ? `
+          <div style="margin-top:12px">
+            <button class="btn small" onclick="changeRequest(${Number(r.id)},'수락됨')">수락</button>
+            <button class="btn danger small" onclick="changeRequest(${Number(r.id)},'거절됨')">거절</button>
+          </div>
         `:""}
 
-        ${r.status==="수락됨"?`
-          <button class="btn small" onclick="openChat(${Number(r.id)})">대화 열기</button>
-        `:""}
+        ${r.status==="수락됨"?
+          `<button class="btn small" onclick="openChat(${Number(r.id)})">대화 열기</button>`
+          :""}
       </div>
     `;
-  }).join("")||`
+  }).join("") || `
     <div class="empty">
       <b>아직 받은 요청이 없습니다.</b>
       내 프로젝트에 도착한 요청이 여기에 표시됩니다.
@@ -570,8 +1106,10 @@ function renderProfile(){
   `;
 }
 
+/* 데이터 불러오기 */
+
 async function loadProjects(){
-  const {data,error}=await sb
+  const {data,error} = await sb
     .from("projects")
     .select("*")
     .order("created_at",{ascending:false});
@@ -579,23 +1117,25 @@ async function loadProjects(){
   if(error)throw error;
 
   projects=data||[];
+
   renderHome();
   renderExplore();
 }
 
 async function loadProfile(){
-  const {data,error}=await sb
+  const {data,error} = await sb
     .from("profiles")
     .select("*")
     .eq("id",user.id)
     .maybeSingle();
 
   if(error)throw error;
+
   profile=data;
 }
 
 async function loadRequests(){
-  const {data,error}=await sb
+  const {data,error} = await sb
     .from("match_requests")
     .select("*")
     .order("created_at",{ascending:false});
@@ -611,76 +1151,152 @@ async function refreshAll(){
     await loadRequests();
     renderProfile();
 
-    if(!$("chatPage").classList.contains("hidden")){
+    if(activeChat){
       await loadChats();
     }
   }catch(e){
-    toast("불러오기 실패: "+e.message);
+    console.error(e);
+    toast("새로고침 실패: "+e.message);
   }
 }
 
+/* 채팅 목록 */
+
+function getOtherName(r,p){
+  if(r.sender_id===user.id){
+    return p.author||"프로젝트 작성자";
+  }
+
+  return r.sender_name||"상대방";
+}
+
 async function loadChats(){
-  if(!sb||!user)return;
+  if(!sb || !user)return;
 
-  const accepted=requests.filter(r=>
-    r.status==="수락됨"&&(
-      r.sender_id===user.id||
-      projects.some(p=>
-        Number(p.id)===Number(r.project_id)&&p.owner_id===user.id
-      )
-    )
-  );
+  const accepted=requests.filter(r=>{
+    const p=projects.find(x=>Number(x.id)===Number(r.project_id));
 
-  const list=$("chatList");
+    return r.status==="수락됨" &&
+      (
+        r.sender_id===user.id ||
+        p?.owner_id===user.id
+      );
+  });
 
   if(!accepted.length){
-    list.innerHTML=`<div class="empty">수락된 대화가 없습니다.</div>`;
-    $("chatTitle").textContent="대화할 상대를 선택하세요";
-    $("messages").innerHTML=`<div class="empty">요청을 수락한 뒤 대화할 수 있습니다.</div>`;
+    $("chatList").innerHTML=`<div class="empty">수락된 대화가 없습니다.</div>`;
+    $("chatTitle").textContent="대화할 상대를 선택하세요.";
+    $("messages").innerHTML=`<div class="empty">수락된 요청이 여기에 표시됩니다.</div>`;
     return;
   }
 
-  list.innerHTML=accepted.map(r=>{
+  $("chatList").innerHTML=accepted.map(r=>{
     const p=projects.find(x=>Number(x.id)===Number(r.project_id));
-    const owner=p?.owner_id;
-    const otherName=r.sender_id===user.id
-      ?(p?.author||"프로젝트 작성자")
-      :r.sender_name;
 
     return `
       <button class="chat-person ${activeChat===Number(r.id)?"active":""}"
         onclick="openChat(${Number(r.id)})">
-        <b>${esc(otherName)}</b><br>
+        <b>${esc(getOtherName(r,p))}</b><br>
         <span class="hint">${esc(p?.title||"프로젝트")}</span>
       </button>
     `;
   }).join("");
 
-  if(activeChat&&accepted.some(r=>Number(r.id)===activeChat)){
+  if(activeChat && accepted.some(r=>Number(r.id)===Number(activeChat))){
     await fetchMessages(activeChat);
   }
 }
 
+/* 실시간 채팅 */
+
+async function startRealtime(requestId){
+
+  // 이전 채널 정리
+  if(chatChannel){
+    await sb.removeChannel(chatChannel);
+    chatChannel=null;
+  }
+
+  $("realtimeStatus").textContent="실시간 연결 중...";
+
+  chatChannel=sb
+    .channel("eum-chat-"+requestId+"-"+user.id)
+
+    .on(
+      "postgres_changes",
+      {
+        event:"INSERT",
+        schema:"public",
+        table:"messages",
+        filter:"request_id=eq."+requestId
+      },
+      async(payload)=>{
+
+        // 현재 대화가 바뀌었으면 무시
+        if(Number(activeChat)!==Number(requestId)){
+          return;
+        }
+
+        console.log("새 메시지 수신:",payload.new);
+
+        // 새 메시지를 즉시 불러오기
+        await fetchMessages(requestId);
+      }
+    )
+
+    .subscribe((status,error)=>{
+
+      console.log("Realtime 상태:",status,error||"");
+
+      if(status==="SUBSCRIBED"){
+        $("realtimeStatus").textContent="실시간 연결됨";
+      }
+
+      if(status==="CHANNEL_ERROR"){
+        $("realtimeStatus").textContent="실시간 연결 오류";
+        toast("실시간 연결 오류. Supabase 설정을 확인하세요.");
+      }
+
+      if(status==="TIMED_OUT"){
+        $("realtimeStatus").textContent="실시간 연결 시간 초과";
+      }
+
+      if(status==="CLOSED"){
+        $("realtimeStatus").textContent="실시간 연결 종료";
+      }
+    });
+}
+
+/* 대화 열기 */
+
 async function openChat(requestId){
   activeChat=Number(requestId);
+
   go("chat");
+
   await loadChats();
+
+  await startRealtime(activeChat);
+
   await fetchMessages(activeChat);
 }
 
+/* 메시지 가져오기 */
+
 async function fetchMessages(requestId){
+
+  const token=++messageLoadToken;
+
   const r=requests.find(x=>Number(x.id)===Number(requestId));
+
   if(!r)return;
 
   const p=projects.find(x=>Number(x.id)===Number(r.project_id));
+
   if(!p)return;
 
-  const otherName=r.sender_id===user.id
-    ?(p.author||"프로젝트 작성자")
-    :r.sender_name;
-
-  $("chatTitle").textContent=otherName+" · "+p.title;
-  $("messages").innerHTML=`<div class="empty">메시지를 불러오는 중...</div>`;
+  $("chatTitle").textContent=
+    getOtherName(r,p)+" · "+p.title;
 
   const {data,error}=await sb
     .from("messages")
@@ -688,11 +1304,14 @@ async function fetchMessages(requestId){
     .eq("request_id",requestId)
     .order("created_at",{ascending:true});
 
+  // 다른 대화의 요청이 늦게 도착한 경우 방지
+  if(token!==messageLoadToken)return;
+
   if(error){
     $("messages").innerHTML=`
       <div class="empty">
-        메시지 조회 실패: ${esc(error.message)}<br>
-        Supabase SQL을 실행했는지 확인하세요.
+        메시지 조회 실패<br>
+        ${esc(error.message)}
       </div>
     `;
     return;
@@ -705,12 +1324,14 @@ async function fetchMessages(requestId){
       ${esc(m.message)}
       <small>${new Date(m.created_at).toLocaleString("ko-KR")}</small>
     </div>
-  `).join("")||`
+  `).join("") || `
     <div class="empty">첫 메시지를 보내 대화를 시작해 보세요.</div>
   `;
 
   box.scrollTop=box.scrollHeight;
 }
+
+/* 메시지 보내기 */
 
 $("messageForm").addEventListener("submit",async e=>{
   e.preventDefault();
@@ -721,12 +1342,14 @@ $("messageForm").addEventListener("submit",async e=>{
   }
 
   const message=$("messageInput").value.trim();
+
   if(!message)return;
 
-  const r=requests.find(x=>Number(x.id)===activeChat);
+  const r=requests.find(x=>Number(x.id)===Number(activeChat));
+
   const p=projects.find(x=>Number(x.id)===Number(r?.project_id));
 
-  if(!r||!p||r.status!=="수락됨"){
+  if(!r || !p || r.status!=="수락됨"){
     toast("수락된 대화만 사용할 수 있습니다.");
     return;
   }
@@ -735,29 +1358,36 @@ $("messageForm").addEventListener("submit",async e=>{
     ?p.owner_id
     :r.sender_id;
 
-  const {error}=await sb.from("messages").insert({
-    request_id:r.id,
-    sender_id:user.id,
-    receiver_id,
-    message
-  });
+  const sendButton=e.submitter;
+
+  if(sendButton)sendButton.disabled=true;
+
+  const {error}=await sb
+    .from("messages")
+    .insert({
+      request_id:r.id,
+      sender_id:user.id,
+      receiver_id:receiver_id,
+      message:message
+    });
+
+  if(sendButton)sendButton.disabled=false;
 
   if(error){
-    toast("메시지 전송 실패: "+error.message);
+    toast("전송 실패: "+error.message);
     return;
   }
 
   $("messageInput").value="";
+
+  // 내가 보낸 메시지도 바로 표시
   await fetchMessages(activeChat);
 });
 
+/* 프로젝트 등록 */
+
 $("projectForm").addEventListener("submit",async e=>{
   e.preventDefault();
-
-  if(!sb||!user){
-    toast("데이터베이스 연결을 확인해 주세요.");
-    return;
-  }
 
   if(!profile){
     toast("먼저 프로필을 저장해 주세요.");
@@ -767,11 +1397,13 @@ $("projectForm").addEventListener("submit",async e=>{
 
   const d=Object.fromEntries(new FormData(e.target).entries());
 
-  const {error}=await sb.from("projects").insert({
-    ...d,
-    owner_id:user.id,
-    author:profile.nickname
-  });
+  const {error}=await sb
+    .from("projects")
+    .insert({
+      ...d,
+      owner_id:user.id,
+      author:profile.nickname
+    });
 
   if(error){
     toast("등록 실패: "+error.message);
@@ -779,25 +1411,26 @@ $("projectForm").addEventListener("submit",async e=>{
   }
 
   e.target.reset();
+
   await loadProjects();
+
   toast("프로젝트를 등록했습니다.");
   go("explore");
 });
 
+/* 프로필 저장 */
+
 $("profileForm").addEventListener("submit",async e=>{
   e.preventDefault();
 
-  if(!sb||!user){
-    toast("Supabase 연결을 확인해 주세요.");
-    return;
-  }
-
   const d=Object.fromEntries(new FormData(e.target).entries());
 
-  const {error}=await sb.from("profiles").upsert({
-    id:user.id,
-    ...d
-  });
+  const {error}=await sb
+    .from("profiles")
+    .upsert({
+      id:user.id,
+      ...d
+    });
 
   if(error){
     toast("프로필 저장 실패: "+error.message);
@@ -805,40 +1438,51 @@ $("profileForm").addEventListener("submit",async e=>{
   }
 
   profile={id:user.id,...d};
+
   toast("프로필을 저장했습니다.");
+
   renderProfile();
 });
 
+/* 시작 */
+
 async function init(){
-  if(!configured){
-    $("homeCards").innerHTML=seed.map(card).join("");
-    $("exploreCards").innerHTML=seed.map(card).join("");
-    $("receivedRequests").innerHTML=`
-      <div class="empty">
-        config.js의 Supabase 설정을 완료해야 요청 기능을 사용할 수 있습니다.
-      </div>
-    `;
+
+  if(!SUPABASE_URL || !SUPABASE_KEY){
+    toast("config.js 설정을 확인해 주세요.");
+    console.error("EUM_CONFIG 설정을 찾을 수 없습니다.");
     return;
   }
 
   try{
-    sb=window.supabase.createClient(supabaseUrl,supabaseKey);
 
-    let {data,error}=await sb.auth.getSession();
+    sb=window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+
+    const {data,error}=await sb.auth.getSession();
+
     if(error)throw error;
 
     user=data.session?.user||null;
 
     if(!user){
-      const a=await sb.auth.signInAnonymously();
-      if(a.error)throw a.error;
-      user=a.data.user;
+      const result=await sb.auth.signInAnonymously();
+
+      if(result.error)throw result.error;
+
+      user=result.data.user;
     }
 
     await loadProjects();
     await loadProfile();
     await loadRequests();
+
     renderProfile();
+
+    console.log("E:UM 연결 완료");
+    console.log("사용자 ID:",user.id);
 
   }catch(e){
     console.error(e);
@@ -848,5 +1492,6 @@ async function init(){
 
 init();
 </script>
+
 </body>
 </html>
