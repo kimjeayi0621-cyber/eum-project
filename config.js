@@ -1,4 +1,4 @@
 window.EUM_CONFIG = {
   SUPABASE_URL: "https://xuhdywredckybzssrree.supabase.co",
-  SUPABASE_ANON_KEY: "여기에_실제_Publishable_Key"
+  SUPABASE_ANON_KEY: "sb_publishable_Ec28MympARKPamOxsrydHw_XIfSmqc0"
 };
